@@ -9,7 +9,6 @@ class ball {
 
 };
 
-//Class paddle is located in gameBallCatch for sequential purposes
 
 paddle Paddle = paddle();
 ball Ball = ball();

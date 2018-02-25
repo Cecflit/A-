@@ -1,3 +1,5 @@
+byte gameBallCatchLoopCounter;
+
 class fallBall {
 
   public:
@@ -25,6 +27,7 @@ fallBall Ball4 = fallBall();
 paddle Catcher = paddle();
 
 void gameBallCatchSetup() {
+  gameBallCatchLoopCounter = 0;
 
   Ball0.positionX = 12;
   Ball0.positionY = 0;
@@ -45,8 +48,13 @@ void gameBallCatchLoop() {
 
   clearScreen();
   gameBallCatchLetMove();
-  gameBallCatchMoveBalls();
-
+  gameBallCatchLoopCounter++;
+  if(gameBallCatchLoopCounter >= 3) {
+    gameBallCatchMoveBalls();
+    gameBallCatchLoopCounter = 0;
+  }
+  gameBallCatchDrawScreen();
+  wait(tickDuration + 1);
 }
 
 void gameBallCatchLetMove() {
@@ -70,34 +78,33 @@ void gameBallCatchMoveBalls() {
   Ball3.positionY++;
   Ball4.positionY++;
 
-  if (Ball0.positionY == 1 && (Catcher.positionY == Ball0.positionX || Catcher.positionY - 1 == Ball0.positionX || Catcher.positionY + 1 == Ball0.positionX)) {
+  if (Ball0.positionY == 23 && (Catcher.positionY == Ball0.positionX || Catcher.positionY - 1 == Ball0.positionX || Catcher.positionY + 1 == Ball0.positionX)) {
     Ball0.positionY = randomInteger(0, 1);
     Ball0.positionX = randomInteger(0, 23);
     score++;
   }
-  if (Ball1.positionY == 1 && (Catcher.positionY == Ball1.positionX || Catcher.positionY - 1 == Ball1.positionX || Catcher.positionY + 1 == Ball1.positionX)) {
+  if (Ball1.positionY == 23 && (Catcher.positionY == Ball1.positionX || Catcher.positionY - 1 == Ball1.positionX || Catcher.positionY + 1 == Ball1.positionX)) {
     Ball1.positionY = randomInteger(0, 1);
     Ball1.positionX = randomInteger(0, 23);
     score++;
   }
-  if (Ball2.positionY == 1 && (Catcher.positionY == Ball2.positionX || Catcher.positionY - 1 == Ball2.positionX || Catcher.positionY + 1 == Ball2.positionX)) {
+  if (Ball2.positionY == 23 && (Catcher.positionY == Ball2.positionX || Catcher.positionY - 1 == Ball2.positionX || Catcher.positionY + 1 == Ball2.positionX)) {
     Ball2.positionY = randomInteger(0, 1);
     Ball2.positionX = randomInteger(0, 23);
     score++;
   }
-  if (Ball3.positionY == 1 && (Catcher.positionY == Ball3.positionX || Catcher.positionY - 1 == Ball3.positionX || Catcher.positionY + 1 == Ball3.positionX)) {
+  if (Ball3.positionY == 23 && (Catcher.positionY == Ball3.positionX || Catcher.positionY - 1 == Ball3.positionX || Catcher.positionY + 1 == Ball3.positionX)) {
     Ball3.positionY = randomInteger(0, 1);
     Ball3.positionX = randomInteger(0, 23);
     score++;
   }
-  if (Ball4.positionY == 1 && (Catcher.positionY == Ball4.positionX || Catcher.positionY - 1 == Ball4.positionX || Catcher.positionY + 1 == Ball4.positionX)) {
+  if (Ball4.positionY == 23 && (Catcher.positionY == Ball4.positionX || Catcher.positionY - 1 == Ball4.positionX || Catcher.positionY + 1 == Ball4.positionX)) {
     Ball4.positionY = randomInteger(0, 1);
     Ball4.positionX = randomInteger(0, 23);
     score++;
   }
 
-  gameBallCatchDrawScreen();
-  wait(tickDuration + 1);
+
 
   if (Ball0.positionY == 23 || Ball1.positionY == 23 || Ball2.positionY == 23 || Ball3.positionY == 23 || Ball4.positionY == 23)endGame();
 }
