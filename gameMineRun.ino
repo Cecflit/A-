@@ -35,16 +35,7 @@ void gameMineRunSetup() {
 
 void gameMineRunLoop() {
 
-  if (!digitalRead(buttonUp)) {
-    Runner.positionY--;
-  };
-  if (!digitalRead(buttonDown)) {
-    Runner.positionY++;
-  };
-
-
-  if (Runner.positionY < 0)Runner.positionY = 23;
-  if (Runner.positionY > 23)Runner.positionY = 0;
+  moveRunner();
 
   for (int i = 0; i < 46; i += 2) {
     Mine.minesColumns[i] = Mine.minesColumns[i + 2];
@@ -72,4 +63,21 @@ void gameMineRunLoop() {
   if (score > 999)score = 999;
   wait(tickDuration + 1);
   gameMineRunTicks++;
+}
+
+void moveRunner() {
+
+clearTile(2, Runner.positionY);
+  if (!digitalRead(buttonUp)) {
+    Runner.positionY--;
+  };
+  if (!digitalRead(buttonDown)) {
+    Runner.positionY++;
+  };
+
+  if (Runner.positionY < 0)Runner.positionY = 23;
+  if (Runner.positionY > 23)Runner.positionY = 0;
+
+  drawTile(2, Runner.positionY);
+
 }
