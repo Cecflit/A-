@@ -8,7 +8,7 @@ class rocket {
   public:
     int positionX[6] = {0, 1, 2, 3, 4, 5};
     int directionX = 1;
-  
+
 };
 
 rocket Rocket01 = rocket();
@@ -29,7 +29,7 @@ class victim {
   public:
     int positionY[2] = {0, 1};
     const byte positionX[2] = {11, 12};
-  
+
 };
 
 victim Victim = victim();
@@ -38,7 +38,7 @@ void gameUnderAttackSetup() {
 
   gameUnderAttackTicks = 0;
 
-  for(byte i = 0; i < 6; i++) {
+  for (byte i = 0; i < 6; i++) {
 
     Rocket01.positionX[i] = def_01_67_1213_1819[i];
     Rocket23.positionX[i] = def_23_89_1415_2021[i];
@@ -53,12 +53,12 @@ void gameUnderAttackSetup() {
     Rocket2021.positionX[i] = def_23_89_1415_2021[i];
     Rocket2223.positionX[i] = def_45_1011_1617_2223[i];
 
-    if(i >= 2)continue;
-    
+    if (i >= 2)continue;
+
     Victim.positionY[i] = def_victim[i];
-    
+
   }
-  
+
 }
 
 void gameUnderAttackLoop() {
@@ -66,64 +66,64 @@ void gameUnderAttackLoop() {
   gameUnderAttackLetMove();
   gameUnderAttackMoveRockets();
   gameUnderAttackRenderScreen();
-  if(gameUnderAttackDetectCollision())endGame();
+  if (gameUnderAttackDetectCollision())endGame();
   wait(tickDuration + 1);
   gameUnderAttackTicks++;
-  if(gameUnderAttackTicks >= 10) {
+  if (gameUnderAttackTicks >= 10) {
 
     gameUnderAttackTicks = 0;
     score++;
-    
+
   }
-  
-  
+
+
 }
 
 void gameUnderAttackLetMove() {
 
-for(byte i = 0;  i < 2; i++) {
-  Victim.positionY[i] += gameUnderAttackDetectButton();
-}
-  
+  for (byte i = 0;  i < 2; i++) {
+    Victim.positionY[i] += gameUnderAttackDetectButton();
+  }
+
 }
 
 void gameUnderAttackMoveRockets() {
 
-  for(byte i = 0; i < 6; i++) {
+  for (byte i = 0; i < 6; i++) {
 
     Rocket01.positionX[i]++;
-    if(Rocket01.positionX[i] > 23)Rocket01.positionX[i] = 0;
+    if (Rocket01.positionX[i] > 23)Rocket01.positionX[i] = 0;
     Rocket45.positionX[i]++;
-    if(Rocket45.positionX[i] > 23)Rocket45.positionX[i] = 0;
+    if (Rocket45.positionX[i] > 23)Rocket45.positionX[i] = 0;
     Rocket89.positionX[i]++;
-    if(Rocket89.positionX[i] > 23)Rocket89.positionX[i] = 0;
+    if (Rocket89.positionX[i] > 23)Rocket89.positionX[i] = 0;
     Rocket1213.positionX[i]++;
-    if(Rocket1213.positionX[i] > 23)Rocket1213.positionX[i] = 0;
+    if (Rocket1213.positionX[i] > 23)Rocket1213.positionX[i] = 0;
     Rocket1617.positionX[i]++;
-    if(Rocket1617.positionX[i] > 23)Rocket1617.positionX[i] = 0;
+    if (Rocket1617.positionX[i] > 23)Rocket1617.positionX[i] = 0;
     Rocket2021.positionX[i]++;
-    if(Rocket2021.positionX[i] > 23)Rocket2021.positionX[i] = 0;
+    if (Rocket2021.positionX[i] > 23)Rocket2021.positionX[i] = 0;
     Rocket23.positionX[i]--;
-    if(Rocket23.positionX[i] < 0)Rocket23.positionX[i] = 23;
+    if (Rocket23.positionX[i] < 0)Rocket23.positionX[i] = 23;
     Rocket67.positionX[i]--;
-    if(Rocket67.positionX[i] < 0)Rocket67.positionX[i] = 23;
+    if (Rocket67.positionX[i] < 0)Rocket67.positionX[i] = 23;
     Rocket1011.positionX[i]--;
-    if(Rocket1011.positionX[i] < 0)Rocket1011.positionX[i] = 23;
+    if (Rocket1011.positionX[i] < 0)Rocket1011.positionX[i] = 23;
     Rocket1415.positionX[i]--;
-    if(Rocket1415.positionX[i] < 0)Rocket1415.positionX[i] = 23;
+    if (Rocket1415.positionX[i] < 0)Rocket1415.positionX[i] = 23;
     Rocket1819.positionX[i]--;
-    if(Rocket1819.positionX[i] < 0)Rocket1819.positionX[i] = 23;
+    if (Rocket1819.positionX[i] < 0)Rocket1819.positionX[i] = 23;
     Rocket2223.positionX[i]--;
-    if(Rocket2223.positionX[i] < 0)Rocket2223.positionX[i] = 23;
+    if (Rocket2223.positionX[i] < 0)Rocket2223.positionX[i] = 23;
   }
-  
+
 }
 
 void gameUnderAttackRenderScreen() {
 
   clearScreen();
 
-  for(byte i = 0; i < 6; i++) {
+  for (byte i = 0; i < 6; i++) {
 
     drawTile(Rocket01.positionX[i], 0);
     drawTile(Rocket01.positionX[i], 1);
@@ -150,13 +150,13 @@ void gameUnderAttackRenderScreen() {
     drawTile(Rocket2223.positionX[i], 22);
     drawTile(Rocket2223.positionX[i], 23);
 
-    if(i >= 2)continue;
+    if (i >= 2)continue;
 
     drawTile(11, Victim.positionY[i]);
     drawTile(12, Victim.positionY[i]);
-    
+
   }
-  
+
 }
 
 bool gameUnderAttackDetectCollision() {
@@ -167,23 +167,20 @@ bool gameUnderAttackDetectCollision() {
   //6-7 18-19 <
   //8-9 20-21 >
   //10-11 22-23 <
-  
-for(byte i = 0; i < 2; i++) {
 
-  if(((Victim.positionY[i] < 2 || (Victim.positionY[i] >= 12 && Victim.positionY[i] <= 13)) && ((Rocket01.positionX[5] >= 11 && Rocket01.positionX[5] <= 17) || (Rocket1213.positionX[5] >= 11 && Rocket1213.positionX[5] <= 17))) || (((Victim.positionY[i] >= 2 && Victim.positionY[i] <=3) || (Victim.positionY[i] >= 14 && Victim.positionY[i] <= 15)) && ((Rocket23.positionX[5] >= 11 && Rocket23.positionX[5] <= 17) || (Rocket1415.positionX[5] >= 11 && Rocket1415.positionX[5] <= 17))) || (((Victim.positionY[i] >= 4 && Victim.positionY[i] <=5) || (Victim.positionY[i] >= 16 && Victim.positionY[i] <= 17)) && ((Rocket45.positionX[5] >= 11 && Rocket45.positionX[5] <= 17) || (Rocket1617.positionX[5] >= 11 && Rocket1617.positionX[5] <= 17))) || (((Victim.positionY[i] >= 6 && Victim.positionY[i] <=7) || (Victim.positionY[i] >= 18 && Victim.positionY[i] <= 19)) && ((Rocket67.positionX[5] >= 11 && Rocket67.positionX[5] <= 17) || (Rocket1819.positionX[5] >= 11 && Rocket1819.positionX[5] <= 17))) || (((Victim.positionY[i] >= 8 && Victim.positionY[i] <=9) || (Victim.positionY[i] >= 20 && Victim.positionY[i] <= 21)) && ((Rocket89.positionX[5] >= 11 && Rocket89.positionX[5] <= 17) || (Rocket2021.positionX[5] >= 11 && Rocket2021.positionX[5] <= 17))) || (((Victim.positionY[i] >= 10 && Victim.positionY[i] <=11) || (Victim.positionY[i] > 22)) && ((Rocket1011.positionX[5] >= 11 && Rocket1011.positionX[5] <= 17) || (Rocket2223.positionX[5] >= 11 && Rocket2223.positionX[5] <= 17))))return true;
-
-}
-
-return false;  
+  for (byte i = 0; i < 2; i++) {
+    if (((Victim.positionY[i] < 2 || (Victim.positionY[i] >= 12 && Victim.positionY[i] <= 13)) && ((Rocket01.positionX[5] >= 11 && Rocket01.positionX[5] <= 17) || (Rocket1213.positionX[5] >= 11 && Rocket1213.positionX[5] <= 17))) || (((Victim.positionY[i] >= 2 && Victim.positionY[i] <= 3) || (Victim.positionY[i] >= 14 && Victim.positionY[i] <= 15)) && ((Rocket23.positionX[5] >= 11 && Rocket23.positionX[5] <= 17) || (Rocket1415.positionX[5] >= 11 && Rocket1415.positionX[5] <= 17))) || (((Victim.positionY[i] >= 4 && Victim.positionY[i] <= 5) || (Victim.positionY[i] >= 16 && Victim.positionY[i] <= 17)) && ((Rocket45.positionX[5] >= 11 && Rocket45.positionX[5] <= 17) || (Rocket1617.positionX[5] >= 11 && Rocket1617.positionX[5] <= 17))) || (((Victim.positionY[i] >= 6 && Victim.positionY[i] <= 7) || (Victim.positionY[i] >= 18 && Victim.positionY[i] <= 19)) && ((Rocket67.positionX[5] >= 11 && Rocket67.positionX[5] <= 17) || (Rocket1819.positionX[5] >= 11 && Rocket1819.positionX[5] <= 17))) || (((Victim.positionY[i] >= 8 && Victim.positionY[i] <= 9) || (Victim.positionY[i] >= 20 && Victim.positionY[i] <= 21)) && ((Rocket89.positionX[5] >= 11 && Rocket89.positionX[5] <= 17) || (Rocket2021.positionX[5] >= 11 && Rocket2021.positionX[5] <= 17))) || (((Victim.positionY[i] >= 10 && Victim.positionY[i] <= 11) || (Victim.positionY[i] > 22)) && ((Rocket1011.positionX[5] >= 11 && Rocket1011.positionX[5] <= 17) || (Rocket2223.positionX[5] >= 11 && Rocket2223.positionX[5] <= 17))))return true;
+  }
+  return false;
 }
 
 int gameUnderAttackDetectButton() {
 
-/*
- * 0=none
- * -1=up
- * 1=down
- */
+  /*
+     0=none
+     -1=up
+     1=down
+  */
   return !digitalRead(buttonUp) ? -1 : !digitalRead(buttonDown) ? 1 : 0;
-  
+
 }

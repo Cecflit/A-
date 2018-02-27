@@ -88,13 +88,6 @@ void gameSpaceShootLoop() {
 
   gameSpaceShootDrawScene();
 
-/*  gameSpaceShootLetMove();
-
-  wait(tickDuration + 1);
-  clearScreen();
-
-  gameSpaceShootDrawScene();*/
-
   wait(tickDuration + 1);
 
 

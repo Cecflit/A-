@@ -16,7 +16,7 @@ void gameQuickReflexLoop() {
 
 }
 
-//uses method gameArrowMatchDrawArrow from gameArrowMatch
+//uses function gameArrowMatchDrawArrow from gameArrowMatch
 
 void gameQuickReflexLetGuess() {
 
