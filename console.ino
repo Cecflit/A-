@@ -309,6 +309,7 @@ void renderScreenXPart(byte x_min, byte x_max) {
     }
     digitalWrite(i, HIGH);
   }
+  delayMicroseconds(10*(24 + x_min - x_max));
 }
 
 void renderScreenYPart(byte y_min, byte y_max) {
@@ -327,6 +328,7 @@ void renderScreenYPart(byte y_min, byte y_max) {
     }
     digitalWrite(j + 24, LOW);
   }
+  delayMicroseconds(10*(24 + y_min - y_max));
 }
 
 
