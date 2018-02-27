@@ -60,20 +60,32 @@ void setup() {
 
 void loop() {
   unrenderScreen();
+  clearScreen();
+  drawLogo(game);
+  drawTickDuration();
 
   while (digitalRead(buttonUp)) {
-  drawLogo(game);
 
-    if (!digitalRead(buttonLeft))tickDuration++;
-    if (!digitalRead(buttonRight))tickDuration--;
+    if (!digitalRead(buttonLeft)) {
+      if (tickDuration < 24) {
+        clearTile(23 - tickDuration, 23);
+        tickDuration++;
+      }
+    }
+    if (!digitalRead(buttonRight)) {
+      if (tickDuration) {
+        tickDuration--;
+        drawTile(23 - tickDuration, 23);
+      }
+    }
     if (!digitalRead(buttonDown)) {
+      drawLogo(game);
       game++;
       playSound(2);
       if (game > 9)game = 0;
+      drawLogo(game);
     }
-    if (tickDuration < 0)tickDuration = 0;
-    if (tickDuration > 24)tickDuration = 24;
-    wait(10);
+    wait(1);
 
   }
 
@@ -195,6 +207,12 @@ void clearTile(int x, int y) {
 
 }
 
+void toggleTile(int x, int y) {
+
+  arr[x][y] = !arr[x][y];
+
+}
+
 void clearScreen() { //including pin data
 
   for (byte i = 0; i < 24; i++) {
@@ -254,16 +272,13 @@ void resetGame() {
 
 void drawLogo(byte game) {
 
-
   switch (game) {
 
     case 0 :  //Snake
 
-      clearScreen();
-
       for (byte i = 0; i < 49; i++) {
 
-        drawTile(litPixelsX_snake[i], litPixelsY_snake[i]);
+        toggleTile(litPixelsX_snake[i], litPixelsY_snake[i]);
 
       }
 
@@ -271,11 +286,9 @@ void drawLogo(byte game) {
 
     case 1 : //Mine Run
 
-      clearScreen();
-
       for (byte i = 0; i < 73; i++) {
 
-        drawTile(litPixelsX_minerun[i], litPixelsY_minerun[i]);
+        toggleTile(litPixelsX_minerun[i], litPixelsY_minerun[i]);
 
       }
 
@@ -284,11 +297,9 @@ void drawLogo(byte game) {
 
     case 2 :  //SpaceShoot
 
-      clearScreen();
-
       for (byte i = 0; i < 83; i++) {
 
-        drawTile(litPixelsX_spaceshoot[i], litPixelsY_spaceshoot[i]);
+        toggleTile(litPixelsX_spaceshoot[i], litPixelsY_spaceshoot[i]);
 
       }
 
@@ -296,11 +307,9 @@ void drawLogo(byte game) {
 
     case 3 :  //PowerCord
 
-      clearScreen();
-
       for (byte i = 0; i < 83; i++) {
 
-        drawTile(litPixelsX_powercord[i], litPixelsY_powercord[i]);
+        toggleTile(litPixelsX_powercord[i], litPixelsY_powercord[i]);
 
       }
 
@@ -308,11 +317,9 @@ void drawLogo(byte game) {
 
     case 4 :  //Pong
 
-      clearScreen();
-
       for (byte i = 0; i < 40; i++) {
 
-        drawTile(litPixelsX_pong[i], litPixelsY_pong[i]);
+        toggleTile(litPixelsX_pong[i], litPixelsY_pong[i]);
 
       }
 
@@ -320,11 +327,9 @@ void drawLogo(byte game) {
 
     case 5 :  //StreetCross
 
-      clearScreen();
-
       for (byte i = 0; i < 90; i++) {
 
-        drawTile(litPixelsX_streetcross[i], litPixelsY_streetcross[i]);
+        toggleTile(litPixelsX_streetcross[i], litPixelsY_streetcross[i]);
 
       }
 
@@ -332,11 +337,9 @@ void drawLogo(byte game) {
 
     case 6 :  //ArrowMatch
 
-      clearScreen();
-
       for (byte i = 0; i < 98; i++) {
 
-        drawTile(litPixelsX_arrowmatch[i], litPixelsY_arrowmatch[i]);
+        toggleTile(litPixelsX_arrowmatch[i], litPixelsY_arrowmatch[i]);
 
       }
 
@@ -344,11 +347,9 @@ void drawLogo(byte game) {
 
     case 7 :  //BallCatch
 
-      clearScreen();
-
       for (byte i = 0; i < 76; i++) {
 
-        drawTile(litPixelsX_ballcatch[i], litPixelsY_ballcatch[i]);
+        toggleTile(litPixelsX_ballcatch[i], litPixelsY_ballcatch[i]);
 
       }
 
@@ -356,11 +357,9 @@ void drawLogo(byte game) {
 
     case 8 :  //Quick Reflex
 
-      clearScreen();
-
       for (byte i = 0; i < 97; i++) {
 
-        drawTile(litPixelsX_quickreflex[i], litPixelsY_quickreflex[i]);
+        toggleTile(litPixelsX_quickreflex[i], litPixelsY_quickreflex[i]);
 
       }
 
@@ -368,11 +367,9 @@ void drawLogo(byte game) {
 
     case 9 :  //Under Attack
 
-      clearScreen();
-
       for (byte i = 0; i < 104; i++) {
 
-        drawTile(litPixelsX_underattack[i], litPixelsY_underattack[i]);
+        toggleTile(litPixelsX_underattack[i], litPixelsY_underattack[i]);
 
       }
 
@@ -380,8 +377,8 @@ void drawLogo(byte game) {
 
   }
 
-  drawTickDuration();
-  renderScreen();
+  //drawTickDuration();
+  //renderScreen();
 
 }
 
