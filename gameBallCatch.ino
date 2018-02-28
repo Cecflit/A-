@@ -1,78 +1,92 @@
 byte gameBallCatchLoopCounter;
 
-class fallBall {
+/*class fallBall {
 
   public:
     int positionX;
     int positionY;
     fallBall() {}
 
-};
+};*/
 
 class paddle {
 
   public:
     int positionY = 0;
+    int row = 23;
     paddle() {}
 
 };
 
-fallBall Ball0 = fallBall();
+/*fallBall Ball0 = fallBall();
 fallBall Ball1 = fallBall();
 fallBall Ball2 = fallBall();
 fallBall Ball3 = fallBall();
-fallBall Ball4 = fallBall();
+fallBall Ball4 = fallBall();*/
 
 //uses class paddle written for gamePong, positionY is used as positionX
 paddle Catcher = paddle();
 
-void gameBallCatchSetup() {
+void gameBallCatchSetup() {  
   gameBallCatchLoopCounter = 0;
 
-  Ball0.positionX = 12;
-  Ball0.positionY = 0;
-  Ball1.positionX = 12;
-  Ball1.positionY = 5;
-  Ball2.positionX = 12;
-  Ball2.positionY = 10;
-  Ball3.positionX = 12;
-  Ball3.positionY = 15;
-  Ball4.positionX = 12;
-  Ball4.positionY = 20;
+  clearScreen();
+  drawTile(12, 0);
+  drawTile(12, 5);
+  drawTile(12, 10);
+  drawTile(12, 15);
+  drawTile(12, 20);
+
   Catcher.positionY = 12;
+  Catcher.row = 23;
+  drawTile(Catcher.positionY, Catcher.row);
+  drawTile(Catcher.positionY + 1, Catcher.row);
+  drawTile(Catcher.positionY - 1, Catcher.row);
+
   score = 0;
 
 }
 
 void gameBallCatchLoop() {
 
-  clearScreen();
+  //clearScreen();
   gameBallCatchLetMove();
   gameBallCatchLoopCounter++;
   if(gameBallCatchLoopCounter >= 3) {
     gameBallCatchMoveBalls();
     gameBallCatchLoopCounter = 0;
   }
-  gameBallCatchDrawScreen();
-  wait(tickDuration + 1);
+  //gameBallCatchDrawScreen();
+  for (short i = (tickDuration + 1)*10; i; i--) {
+    renderScreenYShift(23 - i);
+  }
 }
 
 void gameBallCatchLetMove() {
 
-  if (!digitalRead(buttonLeft)) {
+  if (!digitalRead(buttonLeft) && Catcher.positionY > 1) {
+    clearTile(Catcher.positionY + 1, Catcher.row);
     Catcher.positionY--;
+    drawTile(Catcher.positionY - 1, Catcher.row);
   }
-  if (!digitalRead(buttonRight)) {
+  if (!digitalRead(buttonRight) && Catcher.positionY < 22) {
+    clearTile(Catcher.positionY - 1, Catcher.row);
     Catcher.positionY++;
+    drawTile(Catcher.positionY + 1, Catcher.row);
   }
-  if (Catcher.positionY < 1)Catcher.positionY = 1;
-  if (Catcher.positionY > 22)Catcher.positionY = 22;
-
+  
 }
 
 void gameBallCatchMoveBalls() {
 
-  Ball0.positionY++;
+  clearTile(Catcher.positionY, Catcher.row);
+  clearTile(Catcher.positionY + 1, Catcher.row);
+  clearTile(Catcher.positionY - 1, Catcher.row);
+
+  Catcher.row--;
+  if (Catcher.row < 0)Catcher.row = 23;
+
+  /*Ball0.positionY++;
   Ball1.positionY++;
   Ball2.positionY++;
   Ball3.positionY++;
@@ -102,13 +116,29 @@ void gameBallCatchMoveBalls() {
     Ball4.positionY = randomInteger(0, 1);
     Ball4.positionX = randomInteger(0, 23);
     score++;
+  }*/
+
+  for (int x = 0; x < Catcher.positionY - 1; x++) {
+    if (arr[x][Catcher.row]) endGame();
+  }
+  for (int x = Catcher.positionY + 2; x < 24; x++) {
+    if (arr[x][Catcher.row]) endGame();
+  }
+  for (int x = Catcher.positionY - 1; x < Catcher.positionY + 2; x++) {
+    if (arr[x][Catcher.row]) {
+      drawTile(randomInteger(0, 23), (randomInteger(1, 2) + Catcher.positionY)%24);
+      score++;
+      if (score >= 999) score = 999;
+    }
   }
 
+  drawTile(Catcher.positionY, Catcher.row);
+  drawTile(Catcher.positionY + 1, Catcher.row);
+  drawTile(Catcher.positionY - 1, Catcher.row);
 
-
-  if (Ball0.positionY == 23 || Ball1.positionY == 23 || Ball2.positionY == 23 || Ball3.positionY == 23 || Ball4.positionY == 23)endGame();
+  //if (Ball0.positionY == 23 || Ball1.positionY == 23 || Ball2.positionY == 23 || Ball3.positionY == 23 || Ball4.positionY == 23)endGame();
 }
-
+/*
 void gameBallCatchDrawScreen() {
 
   drawTile(Ball0.positionX, Ball0.positionY);
@@ -120,4 +150,4 @@ void gameBallCatchDrawScreen() {
   drawTile(Catcher.positionY + 1, 23);
   drawTile(Catcher.positionY - 1, 23);
 
-}
+}*/
