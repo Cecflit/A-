@@ -41,8 +41,8 @@ void gameMineRunLoop() {
     Mine.minesColumns[i] = Mine.minesColumns[i + 2];
     Mine.minesColumns[i + 1] = Mine.minesColumns[i + 3];
   }
-  Mine.minesColumns[46] = randomInteger(0, 23);
-  Mine.minesColumns[47] = randomInteger(0, 23);
+  Mine.minesColumns[46] = randomInteger(0, 24);
+  Mine.minesColumns[47] = randomInteger(0, 24);
 
   clearScreen();
   drawTile(2, Runner.positionY);

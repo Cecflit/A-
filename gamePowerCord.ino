@@ -1,4 +1,4 @@
-bool gamePowerCordOrientation;
+byte gamePowerCordOrientation;
 bool gamePowerCordLastPressed;
 long gamePowerCordPass;
 
@@ -22,7 +22,7 @@ void gamePowerCordSetup() {
   score = 0;
   Moving.pos = randomInteger(0, 24);
   Dormant.pos = randomInteger(0, 24);
-  gamePowerCordOrientation = randomInteger(0, 2);
+  gamePowerCordOrientation = randomInteger(0, 4);
   gamePowerCordLastPressed = !(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight));
 
 }
@@ -30,12 +30,15 @@ void gamePowerCordSetup() {
 void gamePowerCordLoop() {
 
   randomSeed(micros());
-  Moving.pos = randomInteger(0, 24);
-  Dormant.pos = randomInteger(0, 24);
-  gamePowerCordOrientation = randomInteger(0, 2);
+  while (Moving.pos == Dormant.pos) {
+    Moving.pos = randomInteger(0, 24);
+    Dormant.pos = randomInteger(0, 24);
+  }
+  gamePowerCordOrientation = randomInteger(0, 4);
+  gamePowerCordDrawLines();
 
   while (!gamePowerCordAnyPressed()) {
-    gamePowerCordRenderListen(false);
+    //gamePowerCordRenderListen(false);
     wait(2 * (tickDuration + 1));
   }
   while (gamePowerCordAnyPressed()) {
@@ -45,15 +48,19 @@ void gamePowerCordLoop() {
   if (Moving.pos == Dormant.pos) {
     playSound(2);
     score++;
+    if(score > 999)score = 999;
   } else {
     endGame();
   }
-  if (score > 24) {
+  if (score > 25) {
     while (score < 50) {
       gamePowerCordLoop25();
     }
-    while (score >= 50) {
+    while (score >= 50 && score < 75) {
       gamePowerCordLoop50();
+    }
+    while (score >= 75) {
+      gamePowerCordLoop75();
     }
   }
 
@@ -62,12 +69,15 @@ void gamePowerCordLoop() {
 void gamePowerCordLoop25() {
 
   randomSeed(micros());
-  Moving.pos = randomInteger(0, 24);
-  Dormant.pos = randomInteger(0, 24);
-  gamePowerCordOrientation = randomInteger(0, 2);
+  while (Moving.pos == Dormant.pos) {
+    Moving.pos = randomInteger(0, 24);
+    Dormant.pos = randomInteger(0, 24);
+  }
+  gamePowerCordOrientation = randomInteger(0, 4);
+  gamePowerCordDrawLines();
 
   while (!gamePowerCordAnyPressed()) {
-    gamePowerCordRenderListen(false);
+    //gamePowerCordRenderListen(false);
     wait(tickDuration + 1);
   }
   while (gamePowerCordAnyPressed()) {
@@ -77,6 +87,7 @@ void gamePowerCordLoop25() {
   if (Moving.pos == Dormant.pos) {
     playSound(2);
     score++;
+    if(score > 999)score = 999;
   } else {
     endGame();
   }
@@ -84,12 +95,15 @@ void gamePowerCordLoop25() {
 
 void gamePowerCordLoop50() {
   randomSeed(micros());
-  Moving.pos = randomInteger(0, 24);
-  Dormant.pos = randomInteger(0, 24);
-  gamePowerCordOrientation = randomInteger(0, 2);
+  while (Moving.pos == Dormant.pos) {
+    Moving.pos = randomInteger(0, 24);
+    Dormant.pos = randomInteger(0, 24);
+  }
+  gamePowerCordOrientation = randomInteger(0, 4);
+  gamePowerCordDrawLines();
 
   while (!gamePowerCordAnyPressed()) {
-    gamePowerCordRenderListen(true);
+    //gamePowerCordRenderListen(true);
     wait(tickDuration + 1);
   }
   while (gamePowerCordAnyPressed()) {
@@ -99,6 +113,33 @@ void gamePowerCordLoop50() {
   if (Moving.pos == Dormant.pos) {
     playSound(2);
     score++;
+    if(score > 999)score = 999;
+  } else {
+    endGame();
+  }
+}
+
+void gamePowerCordLoop75() {
+  randomSeed(micros());
+  while (Moving.pos == Dormant.pos) {
+    Moving.pos = randomInteger(0, 24);
+    Dormant.pos = randomInteger(0, 24);
+  }
+  gamePowerCordOrientation = randomInteger(0, 4);
+  gamePowerCordDrawLines();
+
+  while (!gamePowerCordAnyPressed()) {
+    //gamePowerCordRenderListen(true);
+    wait(tickDuration + 1);
+  }
+  while (gamePowerCordAnyPressed()) {
+    gamePowerCordRenderListen(2);
+    wait(tickDuration + 1);
+  }
+  if (Moving.pos == Dormant.pos) {
+    playSound(2);
+    score++;
+    if(score > 999)score = 999;
   } else {
     endGame();
   }
@@ -110,23 +151,25 @@ bool gamePowerCordAnyPressed() {
 
 }
 
-void gamePowerCordRenderListen(bool both) {
+void gamePowerCordRenderListen(byte both) {
   gamePowerCordPass++;
-  if (Moving.forw) {
-    Moving.pos++;
-    if (Moving.pos >= 23) {
-      Moving.forw = false;
-      Moving.pos = 23;
-    }
-  } else {
-    Moving.pos--;
-    if (Moving.pos <= 0) {
-      Moving.forw = true;
-      Moving.pos = 0;
+  if (!both || both == 2 || (both == 1 && (gamePowerCordPass % 2))) {
+    if (Moving.forw) {
+      Moving.pos++;
+      if (Moving.pos >= 23) {
+        Moving.forw = false;
+        Moving.pos = 23;
+      }
+    } else {
+      Moving.pos--;
+      if (Moving.pos <= 0) {
+        Moving.forw = true;
+        Moving.pos = 0;
+      }
     }
   }
 
-  if (both && gamePowerCordPass % 2) {
+  if (both && !(gamePowerCordPass % 2)) {
     if (Dormant.forw) {
       Dormant.pos++;
       if (Dormant.pos >= 23) {
@@ -153,7 +196,7 @@ void gamePowerCordDrawLines() {
 
   clearScreen();
 
-  if (gamePowerCordOrientation) {
+  if (!gamePowerCordOrientation) {
 
     for (byte i = 0; i < 12; i++) {
 
@@ -162,12 +205,28 @@ void gamePowerCordDrawLines() {
 
     }
 
-  } else {
+  } else if(gamePowerCordOrientation == 1) {
 
     for (byte i = 0; i < 12; i++) {
 
       drawTile(Dormant.pos, i);
       drawTile(Moving.pos, i + 12);
+
+    }
+  } else if(gamePowerCordOrientation == 2) {
+
+    for (byte i = 0; i < 12; i++) {
+
+      drawTile(Dormant.pos, i+12);
+      drawTile(Moving.pos, i);
+
+    }
+  }  else if(gamePowerCordOrientation == 3) {
+
+    for (byte i = 0; i < 12; i++) {
+
+      drawTile(i+12, Dormant.pos);
+      drawTile(i, Moving.pos);
 
     }
   }
