@@ -34,9 +34,14 @@ void gameSpaceShootSetup() {
     Asteroid.coordinates[i][1] = randomInteger(-12, 5);
   }
 
+  clearScreen();
+  gameSpaceShootDrawScene();
+
 }
 
 void gameSpaceShootLoop() {
+
+  gameSpaceShootDrawScene();
 
   gameSpaceShootLetMove();
   gameSpaceShootLoopCounter++;
@@ -84,7 +89,6 @@ void gameSpaceShootLoop() {
 
     }
   }
-  clearScreen();
 
   gameSpaceShootDrawScene();
 
@@ -128,24 +132,24 @@ void gameSpaceShootDrawScene() {
 
   for (int i = 0; i < 23; i++) {
 
-    if (Asteroid.coordinates[i][1] >= 0)drawTile(Asteroid.coordinates[i][0], Asteroid.coordinates[i][1]);
-    if (Ship.bulletCoordinates[i][1] != 23)drawTile(Ship.bulletCoordinates[i][0], Ship.bulletCoordinates[i][1]);
+    if (Asteroid.coordinates[i][1] >= 0)toggleTile(Asteroid.coordinates[i][0], Asteroid.coordinates[i][1]);
+    if (Ship.bulletCoordinates[i][1] != 23)toggleTile(Ship.bulletCoordinates[i][0], Ship.bulletCoordinates[i][1]);
 
   }
-  drawTile(Ship.positionX, 23);
-  drawTile(Ship.positionX, 22);
+  toggleTile(Ship.positionX, 23);
+  toggleTile(Ship.positionX, 22);
   if (Ship.positionX && Ship.positionX < 23) {
-    drawTile(Ship.positionX - 1, 23);
-    drawTile(Ship.positionX + 1, 23);
+    toggleTile(Ship.positionX - 1, 23);
+    toggleTile(Ship.positionX + 1, 23);
   } else if (!Ship.positionX) {
 
-    drawTile(1, 23);
-    drawTile(23, 23);
+    toggleTile(1, 23);
+    toggleTile(23, 23);
 
   } else {
 
-    drawTile(22, 23);
-    drawTile(0, 23);
+    toggleTile(22, 23);
+    toggleTile(0, 23);
 
   }
 
