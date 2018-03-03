@@ -1,7 +1,7 @@
 const byte def_01_67_1213_1819[6] = {21, 22, 23, 0, 1, 2};
 const byte def_23_89_1415_2021[6] = {5, 6, 7, 8, 9, 10};
 const byte def_45_1011_1617_2223[6] = {13, 14, 15, 16, 17, 18};
-const byte def_victim[2] = {14, 15};
+const byte def_victim[2] = {12, 13};
 byte gameUnderAttackTicks = 0;
 
 class rocket {
@@ -140,8 +140,8 @@ void gameUnderAttackRenderScreen() {
   
   for (byte r = 0; r < 12; r++) for (byte i = 0; i < 6; i++) {
 
-    toggleTile(Rockets[r].positionX[i], r);
-    toggleTile(Rockets[r].positionX[i], r+1);
+    toggleTile(Rockets[r].positionX[i], 2*r);
+    toggleTile(Rockets[r].positionX[i], 2*r +1);
     /*drawTile(Rocket01.positionX[i], 0);
     drawTile(Rocket01.positionX[i], 1);
     drawTile(Rocket23.positionX[i], 2);
