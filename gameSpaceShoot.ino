@@ -30,7 +30,7 @@ void gameSpaceShootSetup() {
     Ship.bulletCoordinates[i][0] = 23;
     Ship.bulletCoordinates[i][1] = 23;
 
-    Asteroid.coordinates[i][0] = randomInteger(0, 23);
+    Asteroid.coordinates[i][0] = randomInteger(0, 24);
     Asteroid.coordinates[i][1] = randomInteger(-12, 5);
   }
 
@@ -53,23 +53,44 @@ void gameSpaceShootLoop() {
         Ship.bulletCoordinates[i][1] = 23;
 
       }
+      bool has_collided = false;
+
+      for (int j = 0; j < 24; j++) {
+
+        if (Ship.bulletCoordinates[i][1] != 23) {
+          if (Asteroid.coordinates[j][0] == Ship.bulletCoordinates[i][0] && Asteroid.coordinates[j][1] >= Ship.bulletCoordinates[i][1]) {
+
+            has_collided = true;
+            Asteroid.coordinates[j][0] = randomInteger(0, 24);
+            Asteroid.coordinates[j][1] = 0;
+          }
+        }
+      }
+
+      if (has_collided) {
+        score++;
+        if (score > 999)score = 999;
+        Ship.bulletCoordinates[i][0] = 23;
+        Ship.bulletCoordinates[i][1] = 23;
+      }
 
     }
 
-    for (int j = 0; j < 24; j++) {
+    /*for (int j = 0; j < 24; j++) {
 
       if (Ship.bulletCoordinates[i][1] != 23) {
-        if (Asteroid.coordinates[j][0] == Ship.bulletCoordinates[i][0] && Asteroid.coordinates[j][1] == Ship.bulletCoordinates[i][1]) {
+        if (Asteroid.coordinates[j][0] == Ship.bulletCoordinates[i][0] && Asteroid.coordinates[j][1] >= Ship.bulletCoordinates[i][1]) {
 
           score++;
-          Asteroid.coordinates[j][0] = randomInteger(0, 23);
+          if(score > 999)score = 999;
+          Asteroid.coordinates[j][0] = randomInteger(0, 24);
           Asteroid.coordinates[j][1] = 0;
           Ship.bulletCoordinates[i][0] = 23;
           Ship.bulletCoordinates[i][1] = 23;
 
         }
       }
-    }
+      }*/
 
   }
 
@@ -81,9 +102,10 @@ void gameSpaceShootLoop() {
 
       if (Asteroid.coordinates[i][1] == 23)endGame();
       if (Asteroid.coordinates[i][0] == Ship.positionX && Asteroid.coordinates[i][1] == 21)endGame();
-
     }
+
   }
+
   clearScreen();
 
   gameSpaceShootDrawScene();
@@ -95,14 +117,14 @@ void gameSpaceShootLoop() {
 
 void gameSpaceShootLetMove() {
 
+  if (!digitalRead(buttonUp)) {
+    gameSpaceShootFire();
+  }
   if (!digitalRead(buttonLeft)) {
     Ship.positionX--;
   }
   if (!digitalRead(buttonRight)) {
     Ship.positionX++;
-  }
-  if (!digitalRead(buttonUp)) {
-    gameSpaceShootFire();
   }
 
   if (Ship.positionX > 23)Ship.positionX = 0;
@@ -116,7 +138,7 @@ void gameSpaceShootFire() {
 
     if (Ship.bulletCoordinates[i][1] == 23) {
       Ship.bulletCoordinates[i][0] = Ship.positionX;
-      Ship.bulletCoordinates[i][1] = 21;
+      Ship.bulletCoordinates[i][1] = 22;
       break;
     }
 
