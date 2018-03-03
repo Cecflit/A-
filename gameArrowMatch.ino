@@ -18,7 +18,9 @@ void gameArrowMatchSetup() {
   gameArrowMatchInGameTime = 0;
   gameArrowMatchLastHold = false;
   score = 0;
-  gameArrowMatchNewArrow();
+  clearScreen();
+  gameArrowMatchNewArrow(false);
+  gameArrowMatchDrawTime(gameArrowMatchTimer);
 
 }
 
@@ -26,31 +28,36 @@ void gameArrowMatchLoop() {
 
   gameArrowMatchWaitWhileListening();
   gameArrowMatchInGameTime++;
-  if (!(gameArrowMatchInGameTime % 2))gameArrowMatchTimer--;
+  if (!(gameArrowMatchInGameTime % 2)) {
+    gameArrowMatchTimer--;
+    clearTile(gameArrowMatchTimer, 0);
+  }
   if (!gameArrowMatchTimer)endGame();
-  clearScreen();
-  gameArrowMatchDrawArrow(gameArrowMatchArrow);
-  gameArrowMatchDrawTime(gameArrowMatchTimer);
+  //clearScreen();
+  //gameArrowMatchDrawArrow(gameArrowMatchArrow);
 }
 
-void gameArrowMatchNewArrow() {
+void gameArrowMatchNewArrow(byte clear_screen) {
 
+  if (clear_screen) {
+    gameArrowMatchDrawArrow(gameArrowMatchArrow);
+  }
   gameArrowMatchArrow = randomInteger(0, 4);
   gameArrowMatchDrawArrow(gameArrowMatchArrow);
-  gameArrowMatchDrawTime(gameArrowMatchTimer);
+  //gameArrowMatchDrawTime(gameArrowMatchTimer);
 
 }
 
 void gameArrowMatchDrawArrow(byte arrow) {
 
-  clearScreen();
+  //clearScreen();
 
   //0up, 1down, 2left, 3right
   if (!arrow) {
 
     for (byte i = 0; i < 66; i++) {
 
-        drawTile(gameArrowMatchUpX[i], gameArrowMatchUpY[i]);
+      toggleTile(gameArrowMatchUpX[i], gameArrowMatchUpY[i]);
     }
 
   }
@@ -59,7 +66,7 @@ void gameArrowMatchDrawArrow(byte arrow) {
 
     for (byte i = 0; i < 66; i++) {
 
-        drawTile(gameArrowMatchDownX[i], gameArrowMatchDownY[i]);
+      toggleTile(gameArrowMatchDownX[i], gameArrowMatchDownY[i]);
     }
 
   }
@@ -68,7 +75,7 @@ void gameArrowMatchDrawArrow(byte arrow) {
 
     for (byte i = 0; i < 66; i++) {
 
-        drawTile(gameArrowMatchLeftX[i], gameArrowMatchLeftY[i]);
+      toggleTile(gameArrowMatchLeftX[i], gameArrowMatchLeftY[i]);
     }
 
   }
@@ -77,7 +84,7 @@ void gameArrowMatchDrawArrow(byte arrow) {
 
     for (byte i = 0; i < 66; i++) {
 
-        drawTile(gameArrowMatchRightX[i], gameArrowMatchLeftY[i]);
+      toggleTile(gameArrowMatchRightX[i], gameArrowMatchLeftY[i]);
     }
 
   }
@@ -137,7 +144,7 @@ void gameArrowMatchLetTry() {
 
     gameArrowMatchLastHold = false;
     score++;
-    gameArrowMatchNewArrow();
+    gameArrowMatchNewArrow(true);
 
   }
 
