@@ -1,6 +1,6 @@
 byte gamePowerCordOrientation;
 bool gamePowerCordLastPressed;
-long gamePowerCordPass;
+byte gamePowerCordPass;
 
 class line {
 

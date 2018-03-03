@@ -1,5 +1,3 @@
-int lastLength = 0;
-
 class snake {
 
   public:
@@ -26,7 +24,6 @@ food Food = food();
 
 void gameSnakeSetup() {
 
-  lastLength = 0;
   score = 0;
   Snake.tail = 573;
   Snake.head = 0;

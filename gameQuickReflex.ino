@@ -1,6 +1,6 @@
 const byte gameQuickReflexQstX[16] = {9, 9, 10, 11, 12, 13, 14, 14, 14, 14, 13, 12, 11, 11, 11, 11};
 const byte gameQuickReflexQstY[16] = {7, 8, 6, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17};
-int gameQuickReflexSequence[5] = {};
+byte gameQuickReflexSequence[5] = {};
 
 void gameQuickReflexSetup() {
 
