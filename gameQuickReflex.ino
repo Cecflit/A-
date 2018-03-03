@@ -134,15 +134,14 @@ void gameQuickReflexNewSequence() {
 
 void gameQuickReflexShowSequence() {
 
+  clearScreen();
+
   for (byte i = 0; i < 5; i++) {
-    clearScreen();
     wait(tickDuration + 5);
     gameArrowMatchDrawArrow(gameQuickReflexSequence[i]);
     wait(5*(tickDuration + 1));
-
+    gameArrowMatchDrawArrow(gameQuickReflexSequence[i]);
   }
-
-  clearScreen();
 
   for (int i = 0; i < 16; i++) {
 
