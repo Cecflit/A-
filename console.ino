@@ -251,6 +251,78 @@ void renderScreen() {
   }
 }
 
+void renderScreenXShift(byte shift) {
+  for (byte i = 0; i < 24; i++) {
+    digitalWrite((i + shift)%24, LOW);
+    for (byte j = 0; j < 24; j++) {
+      if (arr[i][j]) {
+        digitalWrite(j + 24, HIGH);
+      }
+    }
+    delayMicroseconds(10);
+    for (byte j = 0; j < 24; j++) {
+      if (arr[i][j]) {
+        digitalWrite(j + 24, LOW);
+      }
+    }
+    digitalWrite((i + shift)%24,HIGH);
+  }
+}
+
+void renderScreenYShift(byte shift) {
+  for (byte j = 0; j < 24; j++) {
+    digitalWrite((j + shift)%24 + 24, HIGH);
+    for (byte i = 0; i < 24; i++) {
+      if (arr[i][j]) {
+        digitalWrite(i, LOW);
+      }
+    }
+    delayMicroseconds(10);
+    for (byte i = 0; i < 24; i++) {
+      if (arr[i][j]) {
+        digitalWrite(i, HIGH);
+      }
+    }
+    digitalWrite((j + shift)%24 + 24, LOW);
+  }
+}
+
+void renderScreenXPart(byte x_min, byte x_max) {
+  for (byte i = x_min; i < x_max; i++) {
+    digitalWrite(i, LOW);
+    for (byte j = 0; j < 24; j++) {
+      if (arr[i][j]) {
+        digitalWrite(j + 24, HIGH);
+      }
+    }
+    delayMicroseconds(10);
+    for (byte j = 0; j < 24; j++) {
+      if (arr[i][j]) {
+        digitalWrite(j + 24, LOW);
+      }
+    }
+    digitalWrite(i, HIGH);
+  }
+}
+
+void renderScreenYPart(byte y_min, byte y_max) {
+  for (byte j = y_min; j < y_max; j++) {
+    digitalWrite(j + 24, HIGH);
+    for (byte i = 0; i < 24; i++) {
+      if (arr[i][j]) {
+        digitalWrite(i, LOW);
+      }
+    }
+    delayMicroseconds(10);
+    for (byte i = 0; i < 24; i++) {
+      if (arr[i][j]) {
+        digitalWrite(i, HIGH);
+      }
+    }
+    digitalWrite(j + 24, LOW);
+  }
+}
+
 
 void endGame() {
 
