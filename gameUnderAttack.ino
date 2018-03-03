@@ -6,8 +6,8 @@ byte gameUnderAttackTicks = 0;
 
 class rocket {
   public:
-    int positionX[6] = {0, 1, 2, 3, 4, 5};
-    int directionX = 1;
+    char positionX[6] = {0, 1, 2, 3, 4, 5};
+    char directionX = 1;
 
 };
 
@@ -104,9 +104,13 @@ void gameUnderAttackMoveRockets() {
 
   for (byte r = 0; r < 12; r++) for (byte i = 0; i < 6; i++) {
 
-    Rockets[r].positionX[i]++;
-    if (Rockets[r].positionX[i] > 23)Rockets[r].positionX[i] = 0;
-    if (Rockets[r].positionX[i] < 0)Rockets[r].positionX[i] = 23;
+    if (r % 2) { 
+      Rockets[r].positionX[i]++;
+      if (Rockets[r].positionX[i] > 23)Rockets[r].positionX[i] = 0;
+    } else {
+      Rockets[r].positionX[i]--;
+      if (Rockets[r].positionX[i] < 0)Rockets[r].positionX[i] = 23;
+    }
     
     /*Rocket01.positionX[i]++;
     if (Rocket01.positionX[i] > 23)Rocket01.positionX[i] = 0;
