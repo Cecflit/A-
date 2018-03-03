@@ -37,7 +37,7 @@ const byte buttonLeft = 50; //digital pin 50
 const byte buttonRight = 51; //digital pin 51
 const byte speaker = 52; //digital pin 52
 const byte extraGround = 53; //digital pin 53
-byte arr[24][24] = {};
+bool arr[24][24] = {};
 byte game = 0;
 
 void setup() {
