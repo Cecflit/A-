@@ -68,15 +68,24 @@ void gameStreetCrossSetup() {
   Crosser.positionX = 11;
   Crosser.positionY = 22;
 
+  clearScreen();
+  gameStreetCrossDrawScreen();
+
 }
 
 void gameStreetCrossLoop() {
 
+  clearTile(Crosser.positionX, Crosser.positionY);
+  gameStreetCrossDrawScreen();
+
   gameStreetCrossLetMove();
   gameStreetCrossCheckScore();
   gameStreetCrossMoveVehicles();
+
   gameStreetCrossDrawScreen();
   gameStreetCrossCheckCollision();
+  drawTile(Crosser.positionX, Crosser.positionY);
+
   wait(tickDuration + 1);
 
 }
@@ -126,162 +135,74 @@ void gameStreetCrossMoveVehicles() {
 
 void gameStreetCrossDrawScreen() {
 
-  clearScreen();
-
-  drawTile(Crosser.positionX, Crosser.positionY);
-  drawTile(Lane0_0.positionX, Lane0_0.lane);
-  drawTile(Lane0_1.positionX, Lane0_1.lane);
-  drawTile(Lane0_2.positionX, Lane0_2.lane);
-  drawTile(Lane1_0.positionX, Lane1_0.lane);
-  drawTile(Lane1_1.positionX, Lane1_1.lane);
-  drawTile(Lane1_2.positionX, Lane1_2.lane);
-  drawTile(Lane2_0.positionX, Lane2_0.lane);
-  drawTile(Lane2_1.positionX, Lane2_1.lane);
-  drawTile(Lane2_2.positionX, Lane2_2.lane);
-  drawTile(Lane3_0.positionX, Lane3_0.lane);
-  drawTile(Lane3_1.positionX, Lane3_1.lane);
-  drawTile(Lane3_2.positionX, Lane3_2.lane);
+  toggleTile(Lane0_0.positionX, Lane0_0.lane);
+  toggleTile(Lane0_1.positionX, Lane0_1.lane);
+  toggleTile(Lane0_2.positionX, Lane0_2.lane);
+  toggleTile(Lane1_0.positionX, Lane1_0.lane);
+  toggleTile(Lane1_1.positionX, Lane1_1.lane);
+  toggleTile(Lane1_2.positionX, Lane1_2.lane);
+  toggleTile(Lane2_0.positionX, Lane2_0.lane);
+  toggleTile(Lane2_1.positionX, Lane2_1.lane);
+  toggleTile(Lane2_2.positionX, Lane2_2.lane);
+  toggleTile(Lane3_0.positionX, Lane3_0.lane);
+  toggleTile(Lane3_1.positionX, Lane3_1.lane);
+  toggleTile(Lane3_2.positionX, Lane3_2.lane);
 
   if (Lane0_0.positionX < 23) {
-    drawTile(Lane0_0.positionX + 1, Lane0_0.lane);
-  } else drawTile(0, Lane0_0.lane);
+    toggleTile(Lane0_0.positionX + 1, Lane0_0.lane);
+  } else toggleTile(0, Lane0_0.lane);
 
   if (Lane0_1.positionX < 23) {
-    drawTile(Lane0_1.positionX + 1, Lane0_1.lane);
-  } else drawTile(0, Lane0_1.lane);
+    toggleTile(Lane0_1.positionX + 1, Lane0_1.lane);
+  } else toggleTile(0, Lane0_1.lane);
 
   if (Lane0_2.positionX < 23) {
-    drawTile(Lane0_2.positionX + 1, Lane0_2.lane);
-  } else drawTile(0, Lane0_2.lane);
+    toggleTile(Lane0_2.positionX + 1, Lane0_2.lane);
+  } else toggleTile(0, Lane0_2.lane);
 
 
   if (Lane1_0.positionX < 23) {
-    drawTile(Lane1_0.positionX + 1, Lane1_0.lane);
-  } else drawTile(0, Lane1_0.lane);
+    toggleTile(Lane1_0.positionX + 1, Lane1_0.lane);
+  } else toggleTile(0, Lane1_0.lane);
 
   if (Lane1_1.positionX < 23) {
-    drawTile(Lane1_1.positionX + 1, Lane1_1.lane);
-  } else drawTile(0, Lane1_1.lane);
+    toggleTile(Lane1_1.positionX + 1, Lane1_1.lane);
+  } else toggleTile(0, Lane1_1.lane);
 
   if (Lane1_2.positionX < 23) {
-    drawTile(Lane1_2.positionX + 1, Lane1_2.lane);
-  } else drawTile(0, Lane1_2.lane);
+    toggleTile(Lane1_2.positionX + 1, Lane1_2.lane);
+  } else toggleTile(0, Lane1_2.lane);
 
   if (Lane2_0.positionX < 23) {
-    drawTile(Lane2_0.positionX + 1, Lane2_0.lane);
-  } else drawTile(0, Lane2_0.lane);
+    toggleTile(Lane2_0.positionX + 1, Lane2_0.lane);
+  } else toggleTile(0, Lane2_0.lane);
 
   if (Lane2_1.positionX < 23) {
-    drawTile(Lane2_1.positionX + 1, Lane2_1.lane);
-  } else drawTile(0, Lane2_1.lane);
+    toggleTile(Lane2_1.positionX + 1, Lane2_1.lane);
+  } else toggleTile(0, Lane2_1.lane);
 
   if (Lane2_2.positionX < 23) {
-    drawTile(Lane2_2.positionX + 1, Lane2_2.lane);
-  } else drawTile(0, Lane2_2.lane);
+    toggleTile(Lane2_2.positionX + 1, Lane2_2.lane);
+  } else toggleTile(0, Lane2_2.lane);
 
 
   if (Lane3_0.positionX < 23) {
-    drawTile(Lane3_0.positionX + 1, Lane3_0.lane);
-  } else drawTile(0, Lane3_0.lane);
+    toggleTile(Lane3_0.positionX + 1, Lane3_0.lane);
+  } else toggleTile(0, Lane3_0.lane);
 
   if (Lane3_1.positionX < 23) {
-    drawTile(Lane3_1.positionX + 1, Lane3_1.lane);
-  } else drawTile(0, Lane3_1.lane);
+    toggleTile(Lane3_1.positionX + 1, Lane3_1.lane);
+  } else toggleTile(0, Lane3_1.lane);
 
   if (Lane3_2.positionX < 23) {
-    drawTile(Lane3_2.positionX + 1, Lane3_2.lane);
-  } else drawTile(0, Lane3_2.lane);
+    toggleTile(Lane3_2.positionX + 1, Lane3_2.lane);
+  } else toggleTile(0, Lane3_2.lane);
 }
 
 void gameStreetCrossCheckCollision() {
+  
+  if (arr[Crosser.positionX][Crosser.positionY]) endGame();
 
-  if (Crosser.positionY == Lane0_0.lane) {
-
-    //Check collision with vehicle Lane0_0
-
-    if (Crosser.positionX == Lane0_0.positionX)endGame();
-    if (Lane0_0.positionX < 23 && Crosser.positionX == Lane0_0.positionX + 1)endGame();
-    if (Lane0_0.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane0_1
-
-    if (Crosser.positionX == Lane0_1.positionX)endGame();
-    if (Lane0_1.positionX < 23 && Crosser.positionX == Lane0_1.positionX + 1)endGame();
-    if (Lane0_1.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane0_2
-
-    if (Crosser.positionX == Lane0_2.positionX)endGame();
-    if (Lane0_2.positionX < 23 && Crosser.positionX == Lane0_2.positionX + 1)endGame();
-    if (Lane0_2.positionX == 23 && Crosser.positionX == 0)endGame();
-
-  }
-
-  if (Crosser.positionY == Lane1_0.lane) {
-
-    //Check collision with vehicle Lane1_0
-
-    if (Crosser.positionX == Lane1_0.positionX)endGame();
-    if (Lane1_0.positionX < 23 && Crosser.positionX == Lane1_0.positionX + 1)endGame();
-    if (Lane1_0.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane1_1
-
-    if (Crosser.positionX == Lane1_1.positionX)endGame();
-    if (Lane1_1.positionX < 23 && Crosser.positionX == Lane1_1.positionX + 1)endGame();
-    if (Lane1_1.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane1_2
-
-    if (Crosser.positionX == Lane1_2.positionX)endGame();
-    if (Lane1_2.positionX < 23 && Crosser.positionX == Lane1_2.positionX + 1)endGame();
-    if (Lane1_2.positionX == 23 && Crosser.positionX == 0)endGame();
-
-  }
-
-  if (Crosser.positionY == Lane2_0.lane) {
-
-    //Check collision with vehicle Lane2_0
-
-    if (Crosser.positionX == Lane2_0.positionX)endGame();
-    if (Lane2_0.positionX < 23 && Crosser.positionX == Lane2_0.positionX + 1)endGame();
-    if (Lane2_0.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane2_1
-
-    if (Crosser.positionX == Lane2_1.positionX)endGame();
-    if (Lane2_1.positionX < 23 && Crosser.positionX == Lane2_1.positionX + 1)endGame();
-    if (Lane2_1.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane2_2
-
-    if (Crosser.positionX == Lane2_2.positionX)endGame();
-    if (Lane2_2.positionX < 23 && Crosser.positionX == Lane2_2.positionX + 1)endGame();
-    if (Lane2_2.positionX == 23 && Crosser.positionX == 0)endGame();
-
-  }
-
-  if (Crosser.positionY == Lane3_0.lane) {
-
-    //Check collision with vehicle Lane3_0
-
-    if (Crosser.positionX == Lane3_0.positionX)endGame();
-    if (Lane3_0.positionX < 23 && Crosser.positionX == Lane3_0.positionX + 1)endGame();
-    if (Lane3_0.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane3_1
-
-    if (Crosser.positionX == Lane3_1.positionX)endGame();
-    if (Lane3_1.positionX < 23 && Crosser.positionX == Lane3_1.positionX + 1)endGame();
-    if (Lane3_1.positionX == 23 && Crosser.positionX == 0)endGame();
-
-    //Check collision with vehicle Lane3_2
-
-    if (Crosser.positionX == Lane3_2.positionX)endGame();
-    if (Lane3_2.positionX < 23 && Crosser.positionX == Lane3_2.positionX + 1)endGame();
-    if (Lane3_2.positionX == 23 && Crosser.positionX == 0)endGame();
-
-  }
 }
 
 void gameStreetCrossCheckScore() {
