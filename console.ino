@@ -981,7 +981,7 @@ void wait(short time) {
 
 int randomInteger(int min_, int max_) {
 
-  return floor(random(min_, 0.99 + max_));
+  return floor(random(min_, max_));
 
   
 
