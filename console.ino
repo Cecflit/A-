@@ -85,7 +85,7 @@ void loop() {
       if (game > 9)game = 0;
       drawLogo(game);
     }
-    wait(1);
+    wait(10);
 
   }
 
