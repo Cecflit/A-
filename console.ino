@@ -82,7 +82,7 @@ void loop() {
       drawLogo(game);
       game++;
       playSound(2);
-      if (game > 9)game = 0;
+      if (game > 10)game = 0;
       drawLogo(game);
     }
     wait(10);
@@ -188,6 +188,16 @@ void loop() {
     gameUnderAttackSetup();
     while (true) {
       gameUnderAttackLoop();
+    }
+
+    //loop underattack
+  }
+
+  if (game == 10) {
+
+    gameTetrisSetup();
+    while (true) {
+      gameTetrisLoop();
     }
 
     //loop underattack
@@ -366,6 +376,16 @@ void drawLogo(byte game) {
       break;
 
     case 9 :  //Under Attack
+
+      for (byte i = 0; i < 104; i++) {
+
+        toggleTile(litPixelsX_underattack[i], litPixelsY_underattack[i]);
+
+      }
+
+      break;
+
+    case 10 :  //Tetris
 
       for (byte i = 0; i < 104; i++) {
 
