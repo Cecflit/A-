@@ -31,6 +31,9 @@ const byte litPixelsY_quickreflex[97] = {6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 
 const byte litPixelsX_underattack[104] = {2, 4, 6, 9, 11, 12, 15, 16, 17, 19, 20, 2, 4, 6, 7, 9, 11, 13, 15, 19, 21, 2, 4, 6, 8, 9, 11, 13, 15, 16, 19, 20, 2, 4, 6, 9, 11, 13, 15, 19, 21, 2, 3, 4, 6, 9, 11, 12, 15, 16, 17, 19, 21, 1, 4, 5, 6, 8, 9, 10, 13, 17, 18, 20, 22, 0, 2, 5, 9, 12, 14, 16, 20, 22, 0, 2, 5, 9, 12, 14, 16, 20, 21, 0, 1, 2, 5, 9, 12, 13, 14, 16, 20, 22, 0, 2, 5, 9, 12, 14, 17, 18, 20, 22};
 const byte litPixelsY_underattack[104] = {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16};
 
+const byte litPixelsX_tetris[46] = {1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 17, 20, 21, 2,  5,  10, 13, 15, 17, 19, 2,  5,  6,  10, 13, 14, 17, 20, 2,  5,  10, 13, 15, 17, 21, 2,  5,  6,  7,  10, 13, 15, 17, 19, 20};
+const byte litPixelsY_tetris[46] = {9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
+
 const byte buttonUp = 48; //digital pin 48
 const byte buttonDown = 49; //digital pin 49
 const byte buttonLeft = 50; //digital pin 50
@@ -82,7 +85,7 @@ void loop() {
       drawLogo(game);
       game++;
       playSound(2);
-      if (game > 9)game = 0;
+      if (game > 10)game = 0;
       drawLogo(game);
     }
     wait(10);
@@ -188,6 +191,16 @@ void loop() {
     gameUnderAttackSetup();
     while (true) {
       gameUnderAttackLoop();
+    }
+
+    //loop underattack
+  }
+
+  if (game == 10) {
+
+    gameTetrisSetup();
+    while (true) {
+      gameTetrisLoop();
     }
 
     //loop underattack
@@ -370,6 +383,16 @@ void drawLogo(byte game) {
       for (byte i = 0; i < 104; i++) {
 
         toggleTile(litPixelsX_underattack[i], litPixelsY_underattack[i]);
+
+      }
+
+      break;
+
+    case 10 :  //Tetris
+
+      for (byte i = 0; i < 46; i++) {
+
+        toggleTile(litPixelsX_tetris[i], litPixelsY_tetris[i]);
 
       }
 
