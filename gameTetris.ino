@@ -1,4 +1,4 @@
-class GameTetris {
+class GameTetris : public Game {
   public:
     
     bool LoopCounter = false;

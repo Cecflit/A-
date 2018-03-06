@@ -1,4 +1,4 @@
-class GameBallCatch {
+class GameBallCatch : public Game {
   public:
     
     byte LoopCounter;

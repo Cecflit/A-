@@ -1,4 +1,4 @@
-class GameStreetCross {
+class GameStreetCross : public Game {
   public:
     
     bool LastUp;

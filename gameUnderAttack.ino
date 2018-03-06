@@ -1,4 +1,4 @@
-class GameUnderAttack {
+class GameUnderAttack : public Game {
   public:
     
     const byte def_01_67_1213_1819[6] = {21, 22, 23, 0, 1, 2};

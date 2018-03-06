@@ -1,4 +1,4 @@
-class GamePowerCord {
+class GamePowerCord : public Game {
   public:
     byte Orientation;
     bool LastPressed;

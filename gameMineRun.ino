@@ -1,4 +1,4 @@
-class GameMineRun {
+class GameMineRun : public Game {
   public:
 
     int Ticks = 0;

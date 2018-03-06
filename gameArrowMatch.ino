@@ -1,4 +1,4 @@
-class GameArrowMatch {
+class GameArrowMatch : public Game {
   public:
     
     char Arrow;

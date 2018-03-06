@@ -1,4 +1,4 @@
-class GameSnake {
+class GameSnake : public Game {
   public:
     
     class snake {

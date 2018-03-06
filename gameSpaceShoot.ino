@@ -1,4 +1,4 @@
-class GameSpaceShoot {
+class GameSpaceShoot : public Game {
   public:
     
     byte LoopCounter;

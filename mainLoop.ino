@@ -32,138 +32,27 @@ void loop() {
   randomSeed(micros());
 
   playSound(1);
-
-  if (game == 0) {
-
-    GameSnake* g = new GameSnake;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop snake
+  Game* g;
+  
+  switch (game) {
+    case 0:  g = new GameSnake; break;
+    case 1:  g = new GameMineRun; break;
+    case 2:  g = new GameSpaceShoot; break;
+    case 3:  g = new GamePowerCord; break;
+    case 4:  g = new GamePong; break;
+    case 5:  g = new GameStreetCross; break;
+    case 6:  g = new GameArrowMatch; break;
+    case 7:  g = new GameBallCatch; break;
+    case 8:  g = new GameQuickReflex; break;
+    case 9:  g = new GameUnderAttack; break;
+    case 10: g = new GameTetris; break;
   }
-
-  if (game == 1) {
-
-    GameMineRun* g = new GameMineRun;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop minerun
+  
+  g->Setup();
+  while (true) {
+    g->Loop();
   }
-
-  if (game == 2) {
-
-    GameSpaceShoot* g = new GameSpaceShoot;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop spaceshoot
-  }
-
-  if (game == 3) {
-
-    GamePowerCord* g = new GamePowerCord;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop powercord
-  }
-
-  if (game == 4) {
-
-    GamePong* g = new GamePong;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop pong
-  }
-
-  if (game == 5) {
-
-    GameStreetCross* g = new GameStreetCross;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop streetcross
-  }
-
-  if (game == 6) {
-
-    GameArrowMatch* g = new GameArrowMatch;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop arrowmatch
-  }
-
-  if (game == 7) {
-
-    GameBallCatch* g = new GameBallCatch;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop ballcatch
-  }
-
-  if (game == 8) {
-
-    GameQuickReflex* g = new GameQuickReflex;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop quickreflex
-  }
-
-  if (game == 9) {
-
-    GameUnderAttack* g = new GameUnderAttack;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop underattack
-  }
-
-  if (game == 10) {
-
-    GameTetris* g = new GameTetris;
-    g->Setup();
-    while (true) {
-      g->Loop();
-    }
-    delete g;
-
-    //loop underattack
-  }
-
+  delete g;
+  
 }
 

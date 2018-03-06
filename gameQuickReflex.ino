@@ -1,4 +1,4 @@
-class GameQuickReflex {
+class GameQuickReflex : public Game {
   public:
     
     GameArrowMatch gam;
