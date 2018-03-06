@@ -1,5 +1,5 @@
 class GamePong : public Game {
-  public:
+  private:
     
     class ball {
     
@@ -24,6 +24,8 @@ class GamePong : public Game {
     paddle Paddle = paddle();
     ball Ball = ball();
     
+  public:
+    
     void Setup() {
     
       Paddle.positionY = 12;
@@ -43,6 +45,8 @@ class GamePong : public Game {
       wait(tickDuration + 1);
     
     }
+  
+  private:
     
     void LetMove() {
     

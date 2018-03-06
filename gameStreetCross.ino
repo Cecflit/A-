@@ -1,5 +1,5 @@
 class GameStreetCross : public Game {
-  public:
+  private:
     
     bool LastUp;
     
@@ -35,6 +35,8 @@ class GameStreetCross : public Game {
     };
     
     crosser Crosser = crosser();
+    
+  public:
     
     void Setup() {
     
@@ -90,6 +92,8 @@ class GameStreetCross : public Game {
       wait(tickDuration + 1);
     
     }
+    
+  private:
     
     void LetMove() {
     

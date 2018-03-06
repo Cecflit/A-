@@ -1,5 +1,5 @@
 class GameUnderAttack : public Game {
-  public:
+  private:
     
     const byte def_01_67_1213_1819[6] = {21, 22, 23, 0, 1, 2};
     const byte def_23_89_1415_2021[6] = {5, 6, 7, 8, 9, 10};
@@ -25,6 +25,8 @@ class GameUnderAttack : public Game {
     };
     
     victim Victim = victim();
+    
+  public:
     
     void Setup() {
     
@@ -82,6 +84,8 @@ class GameUnderAttack : public Game {
     
     
     }
+    
+  private:
     
     void LetMove() {
     

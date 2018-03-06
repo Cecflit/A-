@@ -1,5 +1,5 @@
 class GameBallCatch : public Game {
-  public:
+  private:
     
     byte LoopCounter;
     
@@ -28,6 +28,8 @@ class GameBallCatch : public Game {
     
     //uses class paddle written for gamePong, positionY is used as positionX
     paddle Catcher = paddle();
+    
+  public:
     
     void Setup() {
       LoopCounter = 0;
@@ -59,6 +61,8 @@ class GameBallCatch : public Game {
       DrawScreen();
       wait(tickDuration + 1);
     }
+    
+  private:
     
     void LetMove() {
     

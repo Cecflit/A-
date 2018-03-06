@@ -1,5 +1,5 @@
 class GameMineRun : public Game {
-  public:
+  private:
 
     int Ticks = 0;
     
@@ -27,6 +27,8 @@ class GameMineRun : public Game {
     };
     
     mine Mine = mine();
+    
+  public:
     
     void Setup() {
     
@@ -67,6 +69,8 @@ class GameMineRun : public Game {
       wait(tickDuration + 1);
       Ticks++;
     }
+    
+  private:
     
     void moveRunner() {
     

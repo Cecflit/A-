@@ -1,11 +1,13 @@
 class GameQuickReflex : public Game {
-  public:
+  private:
     
     GameArrowMatch gam;
     
     const byte QstX[16] = {9, 9, 10, 11, 12, 13, 14, 14, 14, 14, 13, 12, 11, 11, 11, 11};
     const byte QstY[16] = {7, 8, 6, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17};
     byte Sequence[5] = {};
+    
+  public:
     
     void Setup() {
     
@@ -20,6 +22,8 @@ class GameQuickReflex : public Game {
       LetGuess();
     
     }
+    
+  private:
     
     //uses function gameArrowMatchDrawArrow from gameArrowMatch
     

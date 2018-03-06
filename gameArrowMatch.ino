@@ -1,5 +1,5 @@
 class GameArrowMatch : public Game {
-  public:
+  private:
     
     char Arrow;
     char Timer;
@@ -13,6 +13,8 @@ class GameArrowMatch : public Game {
     const byte DownY[66] = {3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9,  10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 17, 18, 19, 17, 18, 19, 16, 17, 18, 16, 17, 18, 15, 16, 17, 15, 16, 17, 15, 16, 15, 16, 14, 15, 14, 15, 13, 14, 13, 14};
     const byte RightX[66] = {3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 17, 18, 19, 17, 18, 19, 16, 17, 18, 16, 17, 18, 15, 16, 17, 15, 16, 17, 15, 16, 15, 16, 14, 15, 14, 15, 13, 14, 13, 14};
     //left Y also used as right Y
+    
+  public:
     
     void Setup() {
     
@@ -39,6 +41,8 @@ class GameArrowMatch : public Game {
       //clearScreen();
       //DrawArrow(Arrow);
     }
+  
+  private:
     
     void NewArrow(byte clear_screen) {
     
@@ -50,6 +54,8 @@ class GameArrowMatch : public Game {
       //DrawTime(Timer);
     
     }
+    
+  public:
     
     void DrawArrow(byte arrow) {
     
@@ -92,6 +98,8 @@ class GameArrowMatch : public Game {
     
       }
     }
+    
+  private:
     
     void LetTry() {
     

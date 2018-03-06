@@ -1,5 +1,5 @@
 class GamePowerCord : public Game {
-  public:
+  private:
     byte Orientation;
     bool LastPressed;
     byte Pass;
@@ -15,6 +15,8 @@ class GamePowerCord : public Game {
     
     line Moving = line();
     line Dormant = line();
+    
+  public:  
     
     void Setup() {
     
@@ -67,6 +69,8 @@ class GamePowerCord : public Game {
       }
     
     }
+    
+  private:  
     
     void Loop25() {
     

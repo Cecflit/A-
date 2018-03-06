@@ -1,5 +1,5 @@
 class GameTetris : public Game {
-  public:
+  private:
     
     bool LoopCounter = false;
     
@@ -12,6 +12,8 @@ class GameTetris : public Game {
     
     const tetromino bricks[7] = {{{0, 1, 2, 3}, {0, 0, 0, 0}}, {{0, 0, 1, 1}, {0, 1, 0, 1}}, {{0, 0, 0, 1}, {0, 1, 2, 2}}, {{1, 1, 1, 0}, {0, 1, 2, 2}}, {{0, 0, 1, 1}, {0, 1, 1, 2}}, {{1, 1, 0, 0}, {0, 1, 1, 2}}, {{0, 1, 1, 2}, {0, 0, 1, 0}}};
     tetromino falling;
+    
+  public:
     
     void Setup() {
     
@@ -33,6 +35,8 @@ class GameTetris : public Game {
       LoopCounter = !LoopCounter;
       
     }
+    
+  private:
     
     void Rotate() {
     

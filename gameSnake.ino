@@ -1,5 +1,5 @@
 class GameSnake : public Game {
-  public:
+  private:
     
     class snake {
     
@@ -24,6 +24,8 @@ class GameSnake : public Game {
     };
     
     food Food = food();
+    
+  public:
     
     void Setup() {
     
@@ -112,6 +114,8 @@ class GameSnake : public Game {
       //Render stage / End tick
       wait(tickDuration + 1);
     }
+    
+  private:
     
     void growTail() {
       

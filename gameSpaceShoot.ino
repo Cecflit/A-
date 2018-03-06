@@ -1,5 +1,5 @@
 class GameSpaceShoot : public Game {
-  public:
+  private:
     
     byte LoopCounter;
     
@@ -23,6 +23,8 @@ class GameSpaceShoot : public Game {
     };
     
     asteroid Asteroid = asteroid();
+    
+  public:
     
     void Setup() {
       LoopCounter = 0;
@@ -120,6 +122,8 @@ class GameSpaceShoot : public Game {
     
     
     }
+    
+  private:
     
     void LetMove() {
     
