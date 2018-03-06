@@ -36,9 +36,9 @@ void loop() {
   if (game == 0) {
 
     GameSnake* g = new GameSnake;
-    g->gameSnakeSetup();
+    g->Setup();
     while (true) {
-      g->gameSnakeLoop();
+      g->Loop();
     }
     delete g;
 
@@ -48,9 +48,9 @@ void loop() {
   if (game == 1) {
 
     GameMineRun* g = new GameMineRun;
-    g->gameMineRunSetup();
+    g->Setup();
     while (true) {
-      g->gameMineRunLoop();
+      g->Loop();
     }
     delete g;
 
@@ -60,9 +60,9 @@ void loop() {
   if (game == 2) {
 
     GameSpaceShoot* g = new GameSpaceShoot;
-    g->gameSpaceShootSetup();
+    g->Setup();
     while (true) {
-      g->gameSpaceShootLoop();
+      g->Loop();
     }
     delete g;
 
@@ -72,9 +72,9 @@ void loop() {
   if (game == 3) {
 
     GamePowerCord* g = new GamePowerCord;
-    g->gamePowerCordSetup();
+    g->Setup();
     while (true) {
-      g->gamePowerCordLoop();
+      g->Loop();
     }
     delete g;
 
@@ -84,9 +84,9 @@ void loop() {
   if (game == 4) {
 
     GamePong* g = new GamePong;
-    g->gamePongSetup();
+    g->Setup();
     while (true) {
-      g->gamePongLoop();
+      g->Loop();
     }
     delete g;
 
@@ -96,9 +96,9 @@ void loop() {
   if (game == 5) {
 
     GameStreetCross* g = new GameStreetCross;
-    g->gameStreetCrossSetup();
+    g->Setup();
     while (true) {
-      g->gameStreetCrossLoop();
+      g->Loop();
     }
     delete g;
 
@@ -108,9 +108,9 @@ void loop() {
   if (game == 6) {
 
     GameArrowMatch* g = new GameArrowMatch;
-    g->gameArrowMatchSetup();
+    g->Setup();
     while (true) {
-      g->gameArrowMatchLoop();
+      g->Loop();
     }
     delete g;
 
@@ -120,9 +120,9 @@ void loop() {
   if (game == 7) {
 
     GameBallCatch* g = new GameBallCatch;
-    g->gameBallCatchSetup();
+    g->Setup();
     while (true) {
-      g->gameBallCatchLoop();
+      g->Loop();
     }
     delete g;
 
@@ -132,9 +132,9 @@ void loop() {
   if (game == 8) {
 
     GameQuickReflex* g = new GameQuickReflex;
-    g->gameQuickReflexSetup();
+    g->Setup();
     while (true) {
-      g->gameQuickReflexLoop();
+      g->Loop();
     }
     delete g;
 
@@ -144,9 +144,9 @@ void loop() {
   if (game == 9) {
 
     GameUnderAttack* g = new GameUnderAttack;
-    g->gameUnderAttackSetup();
+    g->Setup();
     while (true) {
-      g->gameUnderAttackLoop();
+      g->Loop();
     }
     delete g;
 
@@ -156,9 +156,9 @@ void loop() {
   if (game == 10) {
 
     GameTetris* g = new GameTetris;
-    g->gameTetrisSetup();
+    g->Setup();
     while (true) {
-      g->gameTetrisLoop();
+      g->Loop();
     }
     delete g;
 

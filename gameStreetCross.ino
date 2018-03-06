@@ -1,7 +1,7 @@
 class GameStreetCross {
   public:
     
-    bool gameStreetCrossLastUp;
+    bool LastUp;
     
     class vehicle {
     
@@ -36,10 +36,10 @@ class GameStreetCross {
     
     crosser Crosser = crosser();
     
-    void gameStreetCrossSetup() {
+    void Setup() {
     
       score = 0;
-      gameStreetCrossLastUp = false;
+      LastUp = false;
       Lane0_0.lane = 4;
       Lane0_1.lane = 4;
       Lane0_2.lane = 4;
@@ -70,28 +70,28 @@ class GameStreetCross {
       Crosser.positionY = 22;
     
       clearScreen();
-      gameStreetCrossDrawScreen();
+      DrawScreen();
     
     }
     
-    void gameStreetCrossLoop() {
+    void Loop() {
     
       clearTile(Crosser.positionX, Crosser.positionY);
-      gameStreetCrossDrawScreen();
+      DrawScreen();
     
-      gameStreetCrossLetMove();
-      gameStreetCrossCheckScore();
-      gameStreetCrossMoveVehicles();
+      LetMove();
+      CheckScore();
+      MoveVehicles();
     
-      gameStreetCrossDrawScreen();
-      gameStreetCrossCheckCollision();
+      DrawScreen();
+      CheckCollision();
       drawTile(Crosser.positionX, Crosser.positionY);
     
       wait(tickDuration + 1);
     
     }
     
-    void gameStreetCrossLetMove() {
+    void LetMove() {
     
       if (!digitalRead(buttonUp))Crosser.positionY--;
       if (!digitalRead(buttonDown))Crosser.positionY++;
@@ -105,7 +105,7 @@ class GameStreetCross {
     
     }
     
-    void gameStreetCrossMoveVehicles() {
+    void MoveVehicles() {
     
       Lane0_0.positionX++;
       if (Lane0_0.positionX > 23)Lane0_0.positionX = 0;
@@ -134,7 +134,7 @@ class GameStreetCross {
       if (Lane3_2.positionX < 0)Lane3_2.positionX = 23;
     }
     
-    void gameStreetCrossDrawScreen() {
+    void DrawScreen() {
     
       toggleTile(Lane0_0.positionX, Lane0_0.lane);
       toggleTile(Lane0_1.positionX, Lane0_1.lane);
@@ -200,27 +200,27 @@ class GameStreetCross {
       } else toggleTile(0, Lane3_2.lane);
     }
     
-    void gameStreetCrossCheckCollision() {
+    void CheckCollision() {
       
       if (arr[Crosser.positionX][Crosser.positionY]) endGame();
     
     }
     
-    void gameStreetCrossCheckScore() {
+    void CheckScore() {
     
-      if (Crosser.positionY < Lane0_0.lane && !gameStreetCrossLastUp) {
+      if (Crosser.positionY < Lane0_0.lane && !LastUp) {
     
         score++;
         playSound(3);
-        gameStreetCrossLastUp = true;
+        LastUp = true;
     
       }
     
-      if (Crosser.positionY > Lane3_0.lane && gameStreetCrossLastUp) {
+      if (Crosser.positionY > Lane3_0.lane && LastUp) {
     
         score++;
         playSound(3);
-        gameStreetCrossLastUp = false;
+        LastUp = false;
     
       }
     

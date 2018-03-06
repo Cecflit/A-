@@ -1,57 +1,57 @@
 class GameArrowMatch {
   public:
     
-    char gameArrowMatchArrow;
-    char gameArrowMatchTimer;
-    char gameArrowMatchInGameTime;
-    bool gameArrowMatchLastHold;
-    const byte gameArrowMatchUpX[66] = {11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 10, 10, 10, 13, 13, 13, 9, 9, 9, 14, 14, 14, 8, 8, 8, 15, 15, 15, 7, 7, 16, 16, 6, 17, 6, 17, 5, 5, 18, 18};
-    const byte gameArrowMatchUpY[66] = { 3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20,  4,  5,  6,  4,  5,  6, 5, 6, 7, 5,  6,  7,  6, 7, 8, 6,  7,  8,  7, 8, 7,  8,  8, 8,  9, 9,  9, 10, 9, 10};
-    const byte gameArrowMatchLeftX[66] = {3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 4, 5, 6, 4, 5, 6, 5, 6, 7, 5, 6, 7, 6, 7, 8, 6, 7, 8, 7, 8, 7, 8, 8, 9, 8, 9, 9, 10, 9, 10};
-    const byte gameArrowMatchLeftY[66] = {11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 10, 10, 10, 13, 13, 13, 9, 9, 9, 14, 14, 14, 8, 8, 8, 15, 15, 15, 7, 7, 16, 16, 6, 6, 17, 17, 5, 5, 18, 18};
-    const byte gameArrowMatchDownX[66] = {11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 10, 10, 10, 13, 13, 13, 9, 9, 9, 14, 14, 14, 8, 8, 8, 15, 15, 15, 7, 7, 16, 16, 6, 6, 17, 17, 5, 5, 18, 18};
-    const byte gameArrowMatchDownY[66] = {3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9,  10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 17, 18, 19, 17, 18, 19, 16, 17, 18, 16, 17, 18, 15, 16, 17, 15, 16, 17, 15, 16, 15, 16, 14, 15, 14, 15, 13, 14, 13, 14};
-    const byte gameArrowMatchRightX[66] = {3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 17, 18, 19, 17, 18, 19, 16, 17, 18, 16, 17, 18, 15, 16, 17, 15, 16, 17, 15, 16, 15, 16, 14, 15, 14, 15, 13, 14, 13, 14};
+    char Arrow;
+    char Timer;
+    char InGameTime;
+    bool LastHold;
+    const byte UpX[66] = {11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 10, 10, 10, 13, 13, 13, 9, 9, 9, 14, 14, 14, 8, 8, 8, 15, 15, 15, 7, 7, 16, 16, 6, 17, 6, 17, 5, 5, 18, 18};
+    const byte UpY[66] = { 3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20,  4,  5,  6,  4,  5,  6, 5, 6, 7, 5,  6,  7,  6, 7, 8, 6,  7,  8,  7, 8, 7,  8,  8, 8,  9, 9,  9, 10, 9, 10};
+    const byte LeftX[66] = {3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 4, 5, 6, 4, 5, 6, 5, 6, 7, 5, 6, 7, 6, 7, 8, 6, 7, 8, 7, 8, 7, 8, 8, 9, 8, 9, 9, 10, 9, 10};
+    const byte LeftY[66] = {11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 10, 10, 10, 13, 13, 13, 9, 9, 9, 14, 14, 14, 8, 8, 8, 15, 15, 15, 7, 7, 16, 16, 6, 6, 17, 17, 5, 5, 18, 18};
+    const byte DownX[66] = {11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 11, 12, 10, 10, 10, 13, 13, 13, 9, 9, 9, 14, 14, 14, 8, 8, 8, 15, 15, 15, 7, 7, 16, 16, 6, 6, 17, 17, 5, 5, 18, 18};
+    const byte DownY[66] = {3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9,  10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 17, 18, 19, 17, 18, 19, 16, 17, 18, 16, 17, 18, 15, 16, 17, 15, 16, 17, 15, 16, 15, 16, 14, 15, 14, 15, 13, 14, 13, 14};
+    const byte RightX[66] = {3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 17, 18, 19, 17, 18, 19, 16, 17, 18, 16, 17, 18, 15, 16, 17, 15, 16, 17, 15, 16, 15, 16, 14, 15, 14, 15, 13, 14, 13, 14};
     //left Y also used as right Y
     
-    void gameArrowMatchSetup() {
+    void Setup() {
     
-      gameArrowMatchArrow = randomInteger(0, 3);
-      gameArrowMatchTimer = 24;
-      gameArrowMatchInGameTime = 0;
-      gameArrowMatchLastHold = false;
+      Arrow = randomInteger(0, 3);
+      Timer = 24;
+      InGameTime = 0;
+      LastHold = false;
       score = 0;
       clearScreen();
-      gameArrowMatchNewArrow(false);
-      gameArrowMatchDrawTime(gameArrowMatchTimer);
+      NewArrow(false);
+      DrawTime(Timer);
     
     }
     
-    void gameArrowMatchLoop() {
+    void Loop() {
     
-      gameArrowMatchWaitWhileListening();
-      gameArrowMatchInGameTime++;
-      if (!(gameArrowMatchInGameTime % 2)) {
-        gameArrowMatchTimer--;
-        clearTile(gameArrowMatchTimer, 0);
+      WaitWhileListening();
+      InGameTime++;
+      if (!(InGameTime % 2)) {
+        Timer--;
+        clearTile(Timer, 0);
       }
-      if (!gameArrowMatchTimer)endGame();
+      if (!Timer)endGame();
       //clearScreen();
-      //gameArrowMatchDrawArrow(gameArrowMatchArrow);
+      //DrawArrow(Arrow);
     }
     
-    void gameArrowMatchNewArrow(byte clear_screen) {
+    void NewArrow(byte clear_screen) {
     
       if (clear_screen) {
-        gameArrowMatchDrawArrow(gameArrowMatchArrow);
+        DrawArrow(Arrow);
       }
-      gameArrowMatchArrow = randomInteger(0, 4);
-      gameArrowMatchDrawArrow(gameArrowMatchArrow);
-      //gameArrowMatchDrawTime(gameArrowMatchTimer);
+      Arrow = randomInteger(0, 4);
+      DrawArrow(Arrow);
+      //DrawTime(Timer);
     
     }
     
-    void gameArrowMatchDrawArrow(byte arrow) {
+    void DrawArrow(byte arrow) {
     
       //clearScreen();
     
@@ -60,7 +60,7 @@ class GameArrowMatch {
     
         for (byte i = 0; i < 66; i++) {
     
-          toggleTile(gameArrowMatchUpX[i], gameArrowMatchUpY[i]);
+          toggleTile(UpX[i], UpY[i]);
         }
     
       }
@@ -69,7 +69,7 @@ class GameArrowMatch {
     
         for (byte i = 0; i < 66; i++) {
     
-          toggleTile(gameArrowMatchDownX[i], gameArrowMatchDownY[i]);
+          toggleTile(DownX[i], DownY[i]);
         }
     
       }
@@ -78,7 +78,7 @@ class GameArrowMatch {
     
         for (byte i = 0; i < 66; i++) {
     
-          toggleTile(gameArrowMatchLeftX[i], gameArrowMatchLeftY[i]);
+          toggleTile(LeftX[i], LeftY[i]);
         }
     
       }
@@ -87,20 +87,20 @@ class GameArrowMatch {
     
         for (byte i = 0; i < 66; i++) {
     
-          toggleTile(gameArrowMatchRightX[i], gameArrowMatchLeftY[i]);
+          toggleTile(RightX[i], LeftY[i]);
         }
     
       }
     }
     
-    void gameArrowMatchLetTry() {
+    void LetTry() {
     
       if (!(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight))) {
     
-        if (!gameArrowMatchArrow) {
+        if (!Arrow) {
     
           if (!digitalRead(buttonUp)) {
-            gameArrowMatchLastHold = true;
+            LastHold = true;
           } else {
             endGame();
           }
@@ -108,10 +108,10 @@ class GameArrowMatch {
     
         }
     
-        if (gameArrowMatchArrow == 1) {
+        if (Arrow == 1) {
     
           if (!digitalRead(buttonDown)) {
-            gameArrowMatchLastHold = true;
+            LastHold = true;
           } else {
             endGame();
           }
@@ -119,10 +119,10 @@ class GameArrowMatch {
     
         }
     
-        if (gameArrowMatchArrow == 2) {
+        if (Arrow == 2) {
     
           if (!digitalRead(buttonLeft)) {
-            gameArrowMatchLastHold = true;
+            LastHold = true;
           } else {
             endGame();
           }
@@ -130,10 +130,10 @@ class GameArrowMatch {
     
         }
     
-        if (gameArrowMatchArrow == 3) {
+        if (Arrow == 3) {
     
           if (!digitalRead(buttonRight)) {
-            gameArrowMatchLastHold = true;
+            LastHold = true;
           } else {
             endGame();
           }
@@ -143,19 +143,19 @@ class GameArrowMatch {
     
       }
     
-      if (gameArrowMatchLastHold && (digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight))) {
+      if (LastHold && (digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight))) {
     
-        gameArrowMatchLastHold = false;
+        LastHold = false;
         score++;
-        gameArrowMatchNewArrow(true);
+        NewArrow(true);
     
       }
     
     }
     
-    void gameArrowMatchDrawTimer() {
+    void DrawTimer() {
     
-      for (int i = 0; i < gameArrowMatchTimer; i++) {
+      for (int i = 0; i < Timer; i++) {
     
         drawTile(i, 23);
     
@@ -163,16 +163,16 @@ class GameArrowMatch {
     
     }
     
-    void gameArrowMatchWaitWhileListening() {
+    void WaitWhileListening() {
     
       for (int i = 0; i < (tickDuration + 1); i++) {
-        gameArrowMatchLetTry();
+        LetTry();
         wait(1);
       }
     
     }
     
-    void gameArrowMatchDrawTime(byte timer) {
+    void DrawTime(byte timer) {
     
       for(byte i = 0; i < timer; i++) {
     

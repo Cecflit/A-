@@ -1,8 +1,8 @@
 class GamePowerCord {
   public:
-    byte gamePowerCordOrientation;
-    bool gamePowerCordLastPressed;
-    byte gamePowerCordPass;
+    byte Orientation;
+    bool LastPressed;
+    byte Pass;
     
     class line {
     
@@ -16,35 +16,35 @@ class GamePowerCord {
     line Moving = line();
     line Dormant = line();
     
-    void gamePowerCordSetup() {
+    void Setup() {
     
-      gamePowerCordPass = 0;
+      Pass = 0;
       Dormant.forw = false;
       clearScreen();
       score = 0;
       Moving.pos = randomInteger(0, 24);
       Dormant.pos = randomInteger(0, 24);
-      gamePowerCordOrientation = randomInteger(0, 4);
-      gamePowerCordLastPressed = !(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight));
+      Orientation = randomInteger(0, 4);
+      LastPressed = !(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight));
     
     }
     
-    void gamePowerCordLoop() {
+    void Loop() {
     
       randomSeed(micros());
       while (Moving.pos == Dormant.pos) {
         Moving.pos = randomInteger(0, 24);
         Dormant.pos = randomInteger(0, 24);
       }
-      gamePowerCordOrientation = randomInteger(0, 4);
-      gamePowerCordDrawLines();
+      Orientation = randomInteger(0, 4);
+      DrawLines();
     
-      while (!gamePowerCordAnyPressed()) {
-        //gamePowerCordRenderListen(false);
+      while (!AnyPressed()) {
+        //RenderListen(false);
         wait(2 * (tickDuration + 1));
       }
-      while (gamePowerCordAnyPressed()) {
-        gamePowerCordRenderListen(false);
+      while (AnyPressed()) {
+        RenderListen(false);
         wait(2 * (tickDuration + 1));
       }
       if (Moving.pos == Dormant.pos) {
@@ -56,34 +56,34 @@ class GamePowerCord {
       }
       if (score > 25) {
         while (score < 50) {
-          gamePowerCordLoop25();
+          Loop25();
         }
         while (score >= 50 && score < 75) {
-          gamePowerCordLoop50();
+          Loop50();
         }
         while (score >= 75) {
-          gamePowerCordLoop75();
+          Loop75();
         }
       }
     
     }
     
-    void gamePowerCordLoop25() {
+    void Loop25() {
     
       randomSeed(micros());
       while (Moving.pos == Dormant.pos) {
         Moving.pos = randomInteger(0, 24);
         Dormant.pos = randomInteger(0, 24);
       }
-      gamePowerCordOrientation = randomInteger(0, 4);
-      gamePowerCordDrawLines();
+      Orientation = randomInteger(0, 4);
+      DrawLines();
     
-      while (!gamePowerCordAnyPressed()) {
-        //gamePowerCordRenderListen(false);
+      while (!AnyPressed()) {
+        //RenderListen(false);
         wait(tickDuration + 1);
       }
-      while (gamePowerCordAnyPressed()) {
-        gamePowerCordRenderListen(false);
+      while (AnyPressed()) {
+        RenderListen(false);
         wait(tickDuration + 1);
       }
       if (Moving.pos == Dormant.pos) {
@@ -95,21 +95,21 @@ class GamePowerCord {
       }
     }
     
-    void gamePowerCordLoop50() {
+    void Loop50() {
       randomSeed(micros());
       while (Moving.pos == Dormant.pos) {
         Moving.pos = randomInteger(0, 24);
         Dormant.pos = randomInteger(0, 24);
       }
-      gamePowerCordOrientation = randomInteger(0, 4);
-      gamePowerCordDrawLines();
+      Orientation = randomInteger(0, 4);
+      DrawLines();
     
-      while (!gamePowerCordAnyPressed()) {
-        //gamePowerCordRenderListen(true);
+      while (!AnyPressed()) {
+        //RenderListen(true);
         wait(tickDuration + 1);
       }
-      while (gamePowerCordAnyPressed()) {
-        gamePowerCordRenderListen(true);
+      while (AnyPressed()) {
+        RenderListen(true);
         wait(tickDuration + 1);
       }
       if (Moving.pos == Dormant.pos) {
@@ -121,21 +121,21 @@ class GamePowerCord {
       }
     }
     
-    void gamePowerCordLoop75() {
+    void Loop75() {
       randomSeed(micros());
       while (Moving.pos == Dormant.pos) {
         Moving.pos = randomInteger(0, 24);
         Dormant.pos = randomInteger(0, 24);
       }
-      gamePowerCordOrientation = randomInteger(0, 4);
-      gamePowerCordDrawLines();
+      Orientation = randomInteger(0, 4);
+      DrawLines();
     
-      while (!gamePowerCordAnyPressed()) {
-        //gamePowerCordRenderListen(true);
+      while (!AnyPressed()) {
+        //RenderListen(true);
         wait(tickDuration + 1);
       }
-      while (gamePowerCordAnyPressed()) {
-        gamePowerCordRenderListen(2);
+      while (AnyPressed()) {
+        RenderListen(2);
         wait(tickDuration + 1);
       }
       if (Moving.pos == Dormant.pos) {
@@ -147,15 +147,15 @@ class GamePowerCord {
       }
     }
     
-    bool gamePowerCordAnyPressed() {
+    bool AnyPressed() {
     
       return !(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight));
     
     }
     
-    void gamePowerCordRenderListen(byte both) {
-      gamePowerCordPass++;
-      if (!both || both == 2 || (both == 1 && (gamePowerCordPass % 2))) {
+    void RenderListen(byte both) {
+      Pass++;
+      if (!both || both == 2 || (both == 1 && (Pass % 2))) {
         if (Moving.forw) {
           Moving.pos++;
           if (Moving.pos >= 23) {
@@ -171,7 +171,7 @@ class GamePowerCord {
         }
       }
     
-      if (both && !(gamePowerCordPass % 2)) {
+      if (both && !(Pass % 2)) {
         if (Dormant.forw) {
           Dormant.pos++;
           if (Dormant.pos >= 23) {
@@ -187,18 +187,18 @@ class GamePowerCord {
         }
       }
     
-      gamePowerCordDrawLines();
+      DrawLines();
     }
     
-    void gamePowerCordRenderListen10() {
+    void RenderListen10() {
     
     }
     
-    void gamePowerCordDrawLines() {
+    void DrawLines() {
     
       clearScreen();
     
-      if (!gamePowerCordOrientation) {
+      if (!Orientation) {
     
         for (byte i = 0; i < 12; i++) {
     
@@ -207,7 +207,7 @@ class GamePowerCord {
     
         }
     
-      } else if(gamePowerCordOrientation == 1) {
+      } else if(Orientation == 1) {
     
         for (byte i = 0; i < 12; i++) {
     
@@ -215,7 +215,7 @@ class GamePowerCord {
           drawTile(Moving.pos, i + 12);
     
         }
-      } else if(gamePowerCordOrientation == 2) {
+      } else if(Orientation == 2) {
     
         for (byte i = 0; i < 12; i++) {
     
@@ -223,7 +223,7 @@ class GamePowerCord {
           drawTile(Moving.pos, i);
     
         }
-      }  else if(gamePowerCordOrientation == 3) {
+      }  else if(Orientation == 3) {
     
         for (byte i = 0; i < 12; i++) {
     

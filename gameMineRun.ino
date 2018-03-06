@@ -1,7 +1,7 @@
 class GameMineRun {
   public:
 
-    int gameMineRunTicks = 0;
+    int Ticks = 0;
     
     class runner {
     
@@ -28,15 +28,15 @@ class GameMineRun {
     
     mine Mine = mine();
     
-    void gameMineRunSetup() {
+    void Setup() {
     
       score = 0;
       Runner.positionY = 12;
-      gameMineRunTicks = 0;
+      Ticks = 0;
     
     }
     
-    void gameMineRunLoop() {
+    void Loop() {
     
       moveRunner();
     
@@ -62,10 +62,10 @@ class GameMineRun {
           endGame();
         }
       }
-      if (!(gameMineRunTicks % 10))score++;
+      if (!(Ticks % 10))score++;
       if (score > 999)score = 999;
       wait(tickDuration + 1);
-      gameMineRunTicks++;
+      Ticks++;
     }
     
     void moveRunner() {

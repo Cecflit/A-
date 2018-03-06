@@ -1,7 +1,7 @@
 class GameTetris {
   public:
     
-    bool gameTetrisLoopCounter = false;
+    bool LoopCounter = false;
     
     class tetromino {
     
@@ -13,28 +13,28 @@ class GameTetris {
     const tetromino bricks[7] = {{{0, 1, 2, 3}, {0, 0, 0, 0}}, {{0, 0, 1, 1}, {0, 1, 0, 1}}, {{0, 0, 0, 1}, {0, 1, 2, 2}}, {{1, 1, 1, 0}, {0, 1, 2, 2}}, {{0, 0, 1, 1}, {0, 1, 1, 2}}, {{1, 1, 0, 0}, {0, 1, 1, 2}}, {{0, 1, 1, 2}, {0, 0, 1, 0}}};
     tetromino falling;
     
-    void gameTetrisSetup() {
+    void Setup() {
     
       clearScreen();
       score = 0;
-      gameTetrisDrawScene();
-      gameTetrisNew();
-      gameTetrisDrop();
+      DrawScene();
+      New();
+      Drop();
       
     }
     
-    void gameTetrisLoop() {
+    void Loop() {
     
-      gameTetrisDrop();
-      gameTetrisLetMove();
-      if(gameTetrisLoopCounter)gameTetrisMove();
-      gameTetrisDrop();
+      Drop();
+      LetMove();
+      if(LoopCounter)Move();
+      Drop();
       wait(tickDuration + 1);
-      gameTetrisLoopCounter = !gameTetrisLoopCounter;
+      LoopCounter = !LoopCounter;
       
     }
     
-    void gameTetrisRotate() {
+    void Rotate() {
     
       char tetrisX[4];
       char tetrisY[4];
@@ -69,19 +69,19 @@ class GameTetris {
         falling.bricksX[i] = tetrisX[i];
         falling.bricksY[i] = tetrisY[i];
       }
-      gameTetrisDetectCollision();
+      DetectCollision();
     }
     
-    void gameTetrisMove() {
+    void Move() {
     
       for (byte i = 0; i < 4; i++) {
         falling.bricksY[i]++;
       }
-      gameTetrisDetectCollision();
+      DetectCollision();
       
     }
     
-    void gameTetrisCheckRows() {
+    void CheckRows() {
     
       for (byte i = 0; i < 24; i++) {
         bool found = false;
@@ -109,7 +109,7 @@ class GameTetris {
       
     }
     
-    void gameTetrisNew() {
+    void New() {
     
       byte ran = randomInteger(0, 7);
       for (byte i = 0; i < 4; i++) {
@@ -120,57 +120,57 @@ class GameTetris {
       
     }
     
-    void gameTetrisLetMove() {
+    void LetMove() {
     
       if(!digitalRead(buttonLeft)) {
         
-        if(gameTetrisCanMoveLeft()){
+        if(CanMoveLeft()){
           for(byte i = 0; i < 4; i++) {
             falling.bricksX[i]--;
           }
-          gameTetrisDetectCollision();
+          DetectCollision();
         }
         
       }
       
       if(!digitalRead(buttonRight)) {
         
-        if(gameTetrisCanMoveRight()){
+        if(CanMoveRight()){
           for(byte i = 0; i < 4; i++) {
             falling.bricksX[i]++;
           }
-          gameTetrisDetectCollision();
+          DetectCollision();
         }
         
       }
       
       if(!digitalRead(buttonUp)) {
-        if(gameTetrisCanRotate())gameTetrisRotate();
+        if(CanRotate())Rotate();
       }
       
       if(!digitalRead(buttonDown)) {
-        gameTetrisMove();
+        Move();
       }
       
       
     }
     
-    void gameTetrisDetectCollision() {
+    void DetectCollision() {
     
       for (byte i = 0; i < 4; i++) {
         if(falling.bricksY[i] == 23){
-          gameTetrisDrop();
-          gameTetrisNew();
+          Drop();
+          New();
         }else if (arr[falling.bricksX[i]][falling.bricksY[i]+1]) {
-          gameTetrisDrop();
-          gameTetrisNew();
+          Drop();
+          New();
         }
       }
       
-      gameTetrisCheckRows();
+      CheckRows();
     }
     
-    void gameTetrisDrawScene() {
+    void DrawScene() {
     
       for(byte i = 0; i < 24; i++) {
         drawTile(16, i);
@@ -178,7 +178,7 @@ class GameTetris {
       
     }
     
-    void gameTetrisDrop() {
+    void Drop() {
       
       for(byte i = 0; i < 4; i++) {
         toggleTile(falling.bricksX[i], falling.bricksY[i]);
@@ -186,7 +186,7 @@ class GameTetris {
       
     }
     
-    bool gameTetrisCanMoveLeft() {
+    bool CanMoveLeft() {
       
       for(byte i = 0; i < 4; i++) {
         if(!falling.bricksX[i])return false;
@@ -196,7 +196,7 @@ class GameTetris {
     
     }
     
-    bool gameTetrisCanMoveRight() {
+    bool CanMoveRight() {
       
       for(byte i = 0; i < 4; i++) {
         if(falling.bricksX[i] > 14)return false;
@@ -206,7 +206,7 @@ class GameTetris {
     
     }
     
-    bool gameTetrisCanRotate() {
+    bool CanRotate() {
       return true;
     }
     

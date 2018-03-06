@@ -1,7 +1,7 @@
 class GameBallCatch {
   public:
     
-    byte gameBallCatchLoopCounter;
+    byte LoopCounter;
     
     class fallBall {
     
@@ -29,8 +29,8 @@ class GameBallCatch {
     //uses class paddle written for gamePong, positionY is used as positionX
     paddle Catcher = paddle();
     
-    void gameBallCatchSetup() {
-      gameBallCatchLoopCounter = 0;
+    void Setup() {
+      LoopCounter = 0;
     
       Ball0.positionX = 12;
       Ball0.positionY = 0;
@@ -47,20 +47,20 @@ class GameBallCatch {
     
     }
     
-    void gameBallCatchLoop() {
+    void Loop() {
     
       clearScreen();
-      gameBallCatchLetMove();
-      gameBallCatchLoopCounter++;
-      if(gameBallCatchLoopCounter >= 3) {
-        gameBallCatchMoveBalls();
-        gameBallCatchLoopCounter = 0;
+      LetMove();
+      LoopCounter++;
+      if(LoopCounter >= 3) {
+        MoveBalls();
+        LoopCounter = 0;
       }
-      gameBallCatchDrawScreen();
+      DrawScreen();
       wait(tickDuration + 1);
     }
     
-    void gameBallCatchLetMove() {
+    void LetMove() {
     
       if (!digitalRead(buttonLeft)) {
         Catcher.positionY--;
@@ -73,7 +73,7 @@ class GameBallCatch {
     
     }
     
-    void gameBallCatchMoveBalls() {
+    void MoveBalls() {
     
       Ball0.positionY++;
       Ball1.positionY++;
@@ -112,7 +112,7 @@ class GameBallCatch {
       if (Ball0.positionY == 23 || Ball1.positionY == 23 || Ball2.positionY == 23 || Ball3.positionY == 23 || Ball4.positionY == 23)endGame();
     }
     
-    void gameBallCatchDrawScreen() {
+    void DrawScreen() {
     
       drawTile(Ball0.positionX, Ball0.positionY);
       drawTile(Ball1.positionX, Ball1.positionY);

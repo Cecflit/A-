@@ -1,7 +1,7 @@
 class GameSpaceShoot {
   public:
     
-    byte gameSpaceShootLoopCounter;
+    byte LoopCounter;
     
     class ship {
     
@@ -24,8 +24,8 @@ class GameSpaceShoot {
     
     asteroid Asteroid = asteroid();
     
-    void gameSpaceShootSetup() {
-      gameSpaceShootLoopCounter = 0;
+    void Setup() {
+      LoopCounter = 0;
       score = 0;
       Ship.positionX = randomInteger(2, 20);
       for (int i = 0; i < 24; i++) {
@@ -38,16 +38,16 @@ class GameSpaceShoot {
       }
     
       clearScreen();
-      gameSpaceShootDrawScene();
+      DrawScene();
     
     }
     
-    void gameSpaceShootLoop() {
+    void Loop() {
     
-      gameSpaceShootDrawScene();
+      DrawScene();
     
-      gameSpaceShootLetMove();
-      gameSpaceShootLoopCounter++;
+      LetMove();
+      LoopCounter++;
     
     
       for (int i = 0; i < 24; i++) {
@@ -102,8 +102,8 @@ class GameSpaceShoot {
     
       }
     
-      if (gameSpaceShootLoopCounter > 5) {
-        gameSpaceShootLoopCounter = 0;
+      if (LoopCounter > 5) {
+        LoopCounter = 0;
         for (int i = 0; i < 23; i++) {
     
           Asteroid.coordinates[i][1]++;
@@ -114,17 +114,17 @@ class GameSpaceShoot {
     
       }
     
-      gameSpaceShootDrawScene();
+      DrawScene();
     
       wait(tickDuration + 1);
     
     
     }
     
-    void gameSpaceShootLetMove() {
+    void LetMove() {
     
       if (!digitalRead(buttonUp)) {
-        gameSpaceShootFire();
+        Fire();
       }
       if (!digitalRead(buttonLeft)) {
         Ship.positionX--;
@@ -138,7 +138,7 @@ class GameSpaceShoot {
     
     }
     
-    void gameSpaceShootFire() {
+    void Fire() {
     
       for (int i = 0; i < 24; i++) {
     
@@ -152,7 +152,7 @@ class GameSpaceShoot {
     
     }
     
-    void gameSpaceShootDrawScene() {
+    void DrawScene() {
     
       for (int i = 0; i < 23; i++) {
     

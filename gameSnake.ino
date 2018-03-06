@@ -25,7 +25,7 @@ class GameSnake {
     
     food Food = food();
     
-    void gameSnakeSetup() {
+    void Setup() {
     
       score = 0;
       Snake.tail = 573;
@@ -46,7 +46,7 @@ class GameSnake {
       clearScreen();
     }
     
-    void gameSnakeLoop() {
+    void Loop() {
     
       //Direction change
       if (!digitalRead(buttonUp) && !Snake.directionY) {

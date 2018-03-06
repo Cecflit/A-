@@ -5,7 +5,7 @@ class GameUnderAttack {
     const byte def_23_89_1415_2021[6] = {5, 6, 7, 8, 9, 10};
     const byte def_45_1011_1617_2223[6] = {13, 14, 15, 16, 17, 18};
     const byte def_victim[2] = {12, 13};
-    byte gameUnderAttackTicks = 0;
+    byte Ticks = 0;
     
     class rocket {
       public:
@@ -26,9 +26,9 @@ class GameUnderAttack {
     
     victim Victim = victim();
     
-    void gameUnderAttackSetup() {
+    void Setup() {
     
-      gameUnderAttackTicks = 0;
+      Ticks = 0;
     
      
       for (byte i = 0; i < 6; i++) {
@@ -53,29 +53,29 @@ class GameUnderAttack {
       }
       
       clearScreen();
-      gameUnderAttackRenderScreen();
-      gameUnderAttackRenderVictim();
+      RenderScreen();
+      RenderVictim();
     
     }
     
-    void gameUnderAttackLoop() {
+    void Loop() {
     
-      gameUnderAttackRenderScreen();
-      gameUnderAttackRenderVictim();
+      RenderScreen();
+      RenderVictim();
     
-      gameUnderAttackLetMove();
-      gameUnderAttackMoveRockets();
+      LetMove();
+      MoveRockets();
     
-      gameUnderAttackRenderScreen();
-      if (gameUnderAttackDetectCollision())endGame();
-      gameUnderAttackRenderVictim();
+      RenderScreen();
+      if (DetectCollision())endGame();
+      RenderVictim();
       
       wait(tickDuration + 1);
-      gameUnderAttackTicks++;
+      Ticks++;
       
-      if (gameUnderAttackTicks >= 10) {
+      if (Ticks >= 10) {
     
-        gameUnderAttackTicks = 0;
+        Ticks = 0;
         score++;
     
       }
@@ -83,15 +83,15 @@ class GameUnderAttack {
     
     }
     
-    void gameUnderAttackLetMove() {
+    void LetMove() {
     
       for (byte i = 0;  i < 2; i++) {
-        Victim.positionY[i] += gameUnderAttackDetectButton();
+        Victim.positionY[i] += DetectButton();
       }
     
     }
     
-    void gameUnderAttackMoveRockets() {
+    void MoveRockets() {
     
       for (byte r = 0; r < 12; r++) for (byte i = 0; i < 6; i++) {
     
@@ -107,7 +107,7 @@ class GameUnderAttack {
     
     }
     
-    void gameUnderAttackRenderScreen() {
+    void RenderScreen() {
       
       for (byte r = 0; r < 12; r++) for (byte i = 0; i < 6; i++) {
     
@@ -117,7 +117,7 @@ class GameUnderAttack {
       
     }
     
-    void gameUnderAttackRenderVictim() {
+    void RenderVictim() {
       
       toggleTile(11, Victim.positionY[0]);
       toggleTile(12, Victim.positionY[0]);
@@ -125,7 +125,7 @@ class GameUnderAttack {
       toggleTile(12, Victim.positionY[1]);
     }
     
-    bool gameUnderAttackDetectCollision() {
+    bool DetectCollision() {
     
       //0-1 12-13 >
       //2-3 14-15 <
@@ -144,7 +144,7 @@ class GameUnderAttack {
       return false;
     }
     
-    int gameUnderAttackDetectButton() {
+    int DetectButton() {
     
       /*
          0=none

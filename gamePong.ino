@@ -24,7 +24,7 @@ class GamePong {
     paddle Paddle = paddle();
     ball Ball = ball();
     
-    void gamePongSetup() {
+    void Setup() {
     
       Paddle.positionY = 12;
       Ball.positionX = 7;
@@ -32,19 +32,19 @@ class GamePong {
       Ball.directionX = 1;
       Ball.directionY = 1;
     
-      gamePongDrawScreen();
+      DrawScreen();
     
     }
     
-    void gamePongLoop() {
+    void Loop() {
     
-      gamePongLetMove();
-      gamePongMoveBall();
+      LetMove();
+      MoveBall();
       wait(tickDuration + 1);
     
     }
     
-    void gamePongLetMove() {
+    void LetMove() {
     
       if (!digitalRead(buttonUp) && Paddle.positionY > 2) {
         clearTile(0, Paddle.positionY + 1);
@@ -63,7 +63,7 @@ class GamePong {
     
     }
     
-    void gamePongMoveBall() {
+    void MoveBall() {
     
       clearTile(Ball.positionX, Ball.positionY);
     
@@ -113,7 +113,7 @@ class GamePong {
       drawTile(Ball.positionX, Ball.positionY);
     }
     
-    void gamePongDrawScreen() {
+    void DrawScreen() {
     
       clearScreen();
       for (int i = 0; i < 24; i++) {
