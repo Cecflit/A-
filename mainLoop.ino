@@ -48,7 +48,7 @@ void loop() {
     case 10: g = new GameTetris; break;
   }
   
-  g->Setup();
+  //g->Setup();
   while (true) {
     g->Loop();
   }

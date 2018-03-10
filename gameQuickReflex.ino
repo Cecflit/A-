@@ -9,9 +9,18 @@ class GameQuickReflex : public Game {
     
   public:
     
+    GameQuickReflex() :
+      Game(),
+      gam()
+    {
+      score = 0;  
+    }
+    
+    ~GameQuickReflex() {}
+    
     void Setup() {
     
-      score = 0;
+      //score = 0;
     
     }
     

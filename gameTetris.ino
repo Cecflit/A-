@@ -14,14 +14,28 @@ class GameTetris : public Game {
     tetromino falling;
     
   public:
-    
-    void Setup() {
-    
+  
+    GameTetris() :
+      Game(),
+      LoopCounter(false),
+      falling()
+    {
       clearScreen();
       score = 0;
       DrawScene();
       New();
       Drop();
+    }
+    
+    ~GameTetris() {}
+    
+    void Setup() {
+    
+     /* clearScreen();
+      score = 0;
+      DrawScene();
+      New();
+      Drop();*/
       
     }
     

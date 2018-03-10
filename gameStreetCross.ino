@@ -37,9 +37,63 @@ class GameStreetCross : public Game {
     crosser Crosser = crosser();
     
   public:
+  
+    GameStreetCross() :
+      Game(),
+      LastUp(false),
+      Lane0_0(),
+      Lane0_1(),
+      Lane0_2(),
+      Lane1_0(),
+      Lane1_1(),
+      Lane1_2(),
+      Lane2_0(),
+      Lane2_1(),
+      Lane2_2(),
+      Lane3_0(),
+      Lane3_1(),
+      Lane3_2(),
+      Crosser()
+    {
+      score = 0;
+      Lane0_0.lane = 4;
+      Lane0_1.lane = 4;
+      Lane0_2.lane = 4;
+      Lane1_0.lane = 9;
+      Lane1_1.lane = 9;
+      Lane1_2.lane = 9;
+      Lane2_0.lane = 14;
+      Lane2_1.lane = 14;
+      Lane2_2.lane = 14;
+      Lane3_0.lane = 19;
+      Lane3_1.lane = 19;
+      Lane3_2.lane = 19;
+    
+      Lane0_0.positionX = 0;
+      Lane0_1.positionX = 8;
+      Lane0_2.positionX = 16;
+      Lane1_0.positionX = 4;
+      Lane1_1.positionX = 12;
+      Lane1_2.positionX = 20;
+      Lane2_0.positionX = 0;
+      Lane2_1.positionX = 8;
+      Lane2_2.positionX = 16;
+      Lane3_0.positionX = 4;
+      Lane3_1.positionX = 12;
+      Lane3_2.positionX = 20;
+    
+      Crosser.positionX = 11;
+      Crosser.positionY = 22;
+    
+      clearScreen();
+      DrawScreen();
+      
+    }
+    
+    ~GameStreetCross() {}
     
     void Setup() {
-    
+  /*  
       score = 0;
       LastUp = false;
       Lane0_0.lane = 4;
@@ -73,7 +127,7 @@ class GameStreetCross : public Game {
     
       clearScreen();
       DrawScreen();
-    
+*/    
     }
     
     void Loop() {

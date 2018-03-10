@@ -25,9 +25,13 @@ class GameSpaceShoot : public Game {
     asteroid Asteroid = asteroid();
     
   public:
-    
-    void Setup() {
-      LoopCounter = 0;
+  
+    GameSpaceShoot() :
+      Game(),
+      LoopCounter(0),
+      Ship(),
+      Asteroid()
+    {
       score = 0;
       Ship.positionX = randomInteger(2, 20);
       for (int i = 0; i < 24; i++) {
@@ -41,7 +45,26 @@ class GameSpaceShoot : public Game {
     
       clearScreen();
       DrawScene();
+    }
     
+    ~GameSpaceShoot() {}
+    
+    void Setup() {
+      /*LoopCounter = 0;
+      score = 0;
+      Ship.positionX = randomInteger(2, 20);
+      for (int i = 0; i < 24; i++) {
+    
+        Ship.bulletCoordinates[i][0] = 23;
+        Ship.bulletCoordinates[i][1] = 23;
+    
+        Asteroid.coordinates[i][0] = randomInteger(0, 24);
+        Asteroid.coordinates[i][1] = randomInteger(-12, 5);
+      }
+    
+      clearScreen();
+      DrawScene();
+    */
     }
     
     void Loop() {

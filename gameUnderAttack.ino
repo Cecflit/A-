@@ -27,10 +27,44 @@ class GameUnderAttack : public Game {
     victim Victim = victim();
     
   public:
+  
+    GameUnderAttack() :
+      Game(),
+      Ticks(0),
+      Victim()
+    {
+      for (byte i = 0; i < 6; i++) {
+    
+        Rockets[0].positionX[i] = def_01_67_1213_1819[i];
+        Rockets[1].positionX[i] = def_23_89_1415_2021[i];
+        Rockets[2].positionX[i] = def_45_1011_1617_2223[i];
+        Rockets[3].positionX[i] = def_01_67_1213_1819[i];
+        Rockets[4].positionX[i] = def_23_89_1415_2021[i];
+        Rockets[5].positionX[i] = def_45_1011_1617_2223[i];
+        Rockets[6].positionX[i] = def_01_67_1213_1819[i];
+        Rockets[7].positionX[i] = def_23_89_1415_2021[i];
+        Rockets[8].positionX[i] = def_45_1011_1617_2223[i];
+        Rockets[9].positionX[i] = def_01_67_1213_1819[i];
+        Rockets[10].positionX[i] = def_23_89_1415_2021[i];
+        Rockets[11].positionX[i] = def_45_1011_1617_2223[i];
+    
+        if (i >= 2)continue;
+    
+        Victim.positionY[i] = def_victim[i];
+    
+      }
+      
+      clearScreen();
+      RenderScreen();
+      RenderVictim();
+
+    }
+    
+    ~GameUnderAttack() {}
     
     void Setup() {
     
-      Ticks = 0;
+      /*Ticks = 0;
     
      
       for (byte i = 0; i < 6; i++) {
@@ -56,7 +90,7 @@ class GameUnderAttack : public Game {
       
       clearScreen();
       RenderScreen();
-      RenderVictim();
+      RenderVictim();*/
     
     }
     

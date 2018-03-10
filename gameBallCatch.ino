@@ -30,10 +30,17 @@ class GameBallCatch : public Game {
     paddle Catcher = paddle();
     
   public:
-    
-    void Setup() {
-      LoopCounter = 0;
-    
+  
+    GameBallCatch() :
+      Game(),
+      LoopCounter(0),
+      Ball0(),
+      Ball1(),
+      Ball2(),
+      Ball3(),
+      Ball4(),
+      Catcher()
+    {
       Ball0.positionX = 12;
       Ball0.positionY = 0;
       Ball1.positionX = 12;
@@ -46,6 +53,25 @@ class GameBallCatch : public Game {
       Ball4.positionY = 20;
       Catcher.positionY = 12;
       score = 0;
+    }
+    
+    ~GameBallCatch() {}
+    
+    void Setup() {
+      /*LoopCounter = 0;
+    
+      Ball0.positionX = 12;
+      Ball0.positionY = 0;
+      Ball1.positionX = 12;
+      Ball1.positionY = 5;
+      Ball2.positionX = 12;
+      Ball2.positionY = 10;
+      Ball3.positionX = 12;
+      Ball3.positionY = 15;
+      Ball4.positionX = 12;
+      Ball4.positionY = 20;
+      Catcher.positionY = 12;
+      score = 0;*/
     
     }
     

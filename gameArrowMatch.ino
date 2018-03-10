@@ -15,17 +15,32 @@ class GameArrowMatch : public Game {
     //left Y also used as right Y
     
   public:
+  
+    GameArrowMatch() :
+      Game(),
+      Arrow(randomInteger(0, 3)),
+      Timer(24),
+      InGameTime(0),
+      LastHold(false)
+    {
+      score = 0;
+      clearScreen();
+      NewArrow(false);
+      DrawTime(Timer);
+    }
+    
+    ~GameArrowMatch() {}
     
     void Setup() {
     
-      Arrow = randomInteger(0, 3);
+      /*Arrow = randomInteger(0, 3);
       Timer = 24;
       InGameTime = 0;
       LastHold = false;
       score = 0;
       clearScreen();
       NewArrow(false);
-      DrawTime(Timer);
+      DrawTime(Timer);*/
     
     }
     

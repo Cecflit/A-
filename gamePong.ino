@@ -26,15 +26,31 @@ class GamePong : public Game {
     
   public:
     
-    void Setup() {
-    
+    GamePong() :
+      Game(),
+      Paddle(),
+      Ball()
+    {
       Paddle.positionY = 12;
       Ball.positionX = 7;
       Ball.positionY = 8;
       Ball.directionX = 1;
       Ball.directionY = 1;
-    
+      
       DrawScreen();
+    }
+    
+    ~GamePong() {}
+    
+    void Setup() {
+    
+      /*Paddle.positionY = 12;
+      Ball.positionX = 7;
+      Ball.positionY = 8;
+      Ball.directionX = 1;
+      Ball.directionY = 1;
+    
+      DrawScreen();*/
     
     }
     

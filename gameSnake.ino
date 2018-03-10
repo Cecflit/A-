@@ -26,9 +26,12 @@ class GameSnake : public Game {
     food Food = food();
     
   public:
-    
-    void Setup() {
-    
+  
+    GameSnake() :
+      Game(),
+      Snake(),
+      Food()
+    {
       score = 0;
       Snake.tail = 573;
       Snake.head = 0;
@@ -46,6 +49,29 @@ class GameSnake : public Game {
     
       }
       clearScreen();
+    }
+    
+    ~GameSnake() {}
+    
+    void Setup() {
+    /*
+      score = 0;
+      Snake.tail = 573;
+      Snake.head = 0;
+      Snake.directionX = 1;
+      Snake.directionY = 0;
+      Snake.tailPiecesX[Snake.head] = randomInteger(0, 23);
+      Snake.tailPiecesY[Snake.head] = randomInteger(0, 23);
+      Food.positionX = randomInteger(0, 23);
+      Food.positionY = randomInteger(0, 23);
+    
+      while (arr[Food.positionX][Food.positionY]) {
+    
+        Food.positionX = randomInteger(0, 23);
+        Food.positionY = randomInteger(0, 23);
+    
+      }
+      clearScreen();*/
     }
     
     void Loop() {

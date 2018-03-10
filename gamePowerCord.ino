@@ -17,10 +17,27 @@ class GamePowerCord : public Game {
     line Dormant = line();
     
   public:  
+  
+    GamePowerCord() :
+      Game(),
+      Orientation(randomInteger(0, 4)),
+      LastPressed(!(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight))),
+      Pass(0),
+      Moving(),
+      Dormant()
+    {
+      Dormant.forw = false;
+      clearScreen();
+      score = 0;
+      Moving.pos = randomInteger(0, 24);
+      Dormant.pos = randomInteger(0, 24);
+    }      
+    
+    ~GamePowerCord() {}
     
     void Setup() {
     
-      Pass = 0;
+/*      Pass = 0;
       Dormant.forw = false;
       clearScreen();
       score = 0;
@@ -28,7 +45,7 @@ class GamePowerCord : public Game {
       Dormant.pos = randomInteger(0, 24);
       Orientation = randomInteger(0, 4);
       LastPressed = !(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight));
-    
+  */  
     }
     
     void Loop() {

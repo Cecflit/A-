@@ -29,12 +29,23 @@ class GameMineRun : public Game {
     mine Mine = mine();
     
   public:
+  
+    GameMineRun() :
+      Game(),
+      Runner(),
+      Ticks(0)
+    {
+      score = 0;
+      Runner.positionY = 12;
+    }
+    
+    ~GameMineRun() {}
     
     void Setup() {
     
-      score = 0;
+      /*score = 0;
       Runner.positionY = 12;
-      Ticks = 0;
+      Ticks = 0;*/
     
     }
     
