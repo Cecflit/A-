@@ -35,6 +35,7 @@ void loop() {
   Game* g;
   
   switch (game) {
+    default:
     case 0:  g = new GameSnake; break;
     case 1:  g = new GameMineRun; break;
     case 2:  g = new GameSpaceShoot; break;
