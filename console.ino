@@ -25,9 +25,9 @@
 #define CHARACT_Y 34
 #define CHARACT_Z 35
 
+long fancyCounter = 0;
 int score = 0;
 char tickDuration = 10;
-
 
 //individual characters
 
@@ -143,7 +143,7 @@ const byte buttonLeft = 50; //digital pin 50
 const byte buttonRight = 51; //digital pin 51
 const byte speaker = 52; //digital pin 52
 const byte extraGround = 53; //digital pin 53
-bool arr[24][24] = {};
+byte arr[24][24] = {};
 byte game = 0;
 
 void setup() {
@@ -164,19 +164,19 @@ void setup() {
   }
 }
 
-void drawTile(int x, int y) {
+void drawTile(byte x, byte y, byte type = 1) {
 
-  arr[x][y] = true;
+  arr[x][y] = type;
 
 }
 
-void clearTile(int x, int y) {
+void clearTile(byte x, byte y) {
 
   arr[x][y] = false;
 
 }
 
-void toggleTile(int x, int y) {
+void toggleTile(byte x, byte y) {
 
   arr[x][y] = !arr[x][y];
 
@@ -205,11 +205,27 @@ void renderScreen() {
 
   for (byte i = 0; i < 24; i++) {
     digitalWrite(i, LOW);
+
+    
     for (byte j = 0; j < 24; j++) {
-      if (arr[i][j]) {
+      if (arr[i][j] == 1) {
+        digitalWrite(j + 24, HIGH);
+      }
+      if (arr[i][j] == 2 && !(fancyCounter % 5)) {
+        digitalWrite(j + 24, HIGH);
+      }
+      if (arr[i][j] == 3 && fancyCounter % 128 >= 64) {
+        digitalWrite(j + 24, HIGH);
+      }
+      if (arr[i][j] == 4 && fancyCounter % 64 >= 32) {
+        digitalWrite(j + 24, HIGH);
+      }
+      if (arr[i][j] == 5 && fancyCounter % 32 >= 16) {
         digitalWrite(j + 24, HIGH);
       }
     }
+
+    
     delayMicroseconds(10);
     for (byte j = 0; j < 24; j++) {
       if (arr[i][j]) {
@@ -218,6 +234,8 @@ void renderScreen() {
     }
     digitalWrite(i, HIGH);
   }
+
+  fancyCounter++;
 }
 
 
@@ -277,7 +295,7 @@ void drawLogo(byte game) {
       drawCharacter(6, 12, CHARACT_H);
       drawCharacter(10, 12, CHARACT_O);
       drawCharacter(14, 12, CHARACT_O);
-      drawCharacter(18, 12, CHARACT_T);          
+      drawCharacter(18, 12, CHARACT_T);
 
       break;
 
