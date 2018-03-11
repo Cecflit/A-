@@ -32,8 +32,8 @@ class GameMineRun : public Game {
   
     GameMineRun() :
       Game(),
-      Runner(),
-      Ticks(0)
+      Ticks(0),
+      Runner()
     {
       score = 0;
       Runner.positionY = 12;
