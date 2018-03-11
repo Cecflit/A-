@@ -2,11 +2,12 @@ class GameJump : public Game {
   private:
   
   class Penguin {
-    char positionX;
-    char positionY;
-    byte jumpCounter;
 
-    Penguin() {}
+    public:
+      char positionX;
+      char positionY;
+      byte jumpCounter;
+      Penguin() {}
   };
   byte loopCounter;
   byte biome; //0 = LAND; 1 = JUMPS
@@ -22,15 +23,24 @@ class GameJump : public Game {
       score = 0;
       clearScreen();
       Tux.jumpCounter = 0;
+      generateInit();
     }
 
     void Loop() {
-
       loopCounter++;
       if(loopCounter >= 60) {
         loopCounter = 0;
-        biome = randomInteger(0, 2);
+        //biome = randomInteger(0, 2);
       }
+      letMove();
+      if(!(checkCollisionDown()) && !Tux.jumpCounter)moveDown();
+      if(checkCollisionWithJumpy())endGame();
+      if(checkCollisionWithCoin()) {
+        score++;
+        playSound(3);
+      }
+      drawScene();
+      wait(1);
     }
 
   private:
@@ -38,28 +48,55 @@ class GameJump : public Game {
     void moveScreen() {
 
       clearScene();
-      Jumpy.positionX--;
+      //Jumpy.positionX--;
       for(byte i = 0; i < 23; i++) {
         for(byte j = 0; j < 24; j++) {
-          arr[][]
+          arr[i][j] = arr[i+1][j];
         }
+      }
+      drawScene();
+      for(byte i = 0; i < 24; i++) {
+
+        clearTile(23, i);
+        
       }
       generate();
     }
 
     void generate() {
 
-
       generateColumn(23);
-      if(!(randomInteger(0, 5)))placeCoin();
+      if(!(randomInteger(0, 7)))placeCoin();
       
     }
 
     void generateColumn(byte column) {
 
       if(column) {
+
+        char height;
+        for (byte i = 0; i < 24; i++) {
+          if(arr[column-1][23-i] != 2) {
+            height = i - 1;
+            break;
+          } else {
+            height = 23;
+          }
+        }
+        
+        if(!(randomInteger(0, 6)))height+= (char)randomInteger(-6, 4);
+        if(height > 15)height = 15;
+        if(height < 1)height = 1;
+        for (byte i = 0; i <= height; i++) {
+          arr[column][23-i] = 2;
+        }
         
       } else {
+
+        char height = randomInteger(5, 12);
+        for (byte i = 0; i <= height; i++) {
+          arr[0][23-i] = 2;
+        }
         
       }
 
@@ -91,6 +128,11 @@ class GameJump : public Game {
 
     void moveLeft() {
 
+      if(checkCollisionWithCoin(2)) {
+        score++;
+        playSound(3);
+      }
+      clearTile(Tux.positionX, Tux.positionY);
       Tux.positionX--;
       if(Tux.positionX < 0)Tux.positionX = 0;
       
@@ -98,18 +140,23 @@ class GameJump : public Game {
 
     void moveRight() {
 
-      Tux.positionX++;
-
-      if(Tux.positionX >= 8) {
-        moveScreen();
-      } else {
-        
-      }
       
+      if(checkCollisionWithCoin(1)) {
+        score++;
+        playSound(3);
+      }
+      clearTile(Tux.positionX, Tux.positionY);
+      Tux.positionX++;
+      if(Tux.positionX > 8) {
+        Tux.positionX = 8;
+        moveScreen();
+      }      
     }
 
     void moveUp() {
 
+
+      clearTile(Tux.positionX, Tux.positionY);
       Tux.positionY--;
       Tux.jumpCounter--;
       
@@ -117,7 +164,13 @@ class GameJump : public Game {
 
     void moveDown() {
 
+      if(checkCollisionWithCoin(3)) {
+        score++;
+        playSound(3);
+      }
+      clearTile(Tux.positionX, Tux.positionY);
       Tux.positionY++;
+      drawTile(Tux.positionX, Tux.positionY);
       
     }
 
@@ -125,7 +178,7 @@ class GameJump : public Game {
 
       if(!(digitalRead(buttonLeft))) {
 
-        if(!(detectCollisionLeft)) {
+        if(!(checkCollisionLeft())) {
           moveLeft();
         }
         
@@ -133,17 +186,17 @@ class GameJump : public Game {
 
       if(!(digitalRead(buttonRight))) {
 
-        if(!(detectCollisionRight)) {
+        if(!(checkCollisionRight())) {
           moveRight();
         }
         
       }
 
       if(!(digitalRead(buttonUp))) {
-        if(arr[Tux.positionX][Tux.positionY + 1] == 2){
+        if(arr[(byte)Tux.positionX][(byte)Tux.positionY + 1] == 2){
           Tux.jumpCounter = 6;
           moveUp();
-        } else {
+        } else if(Tux.jumpCounter) {
           moveUp();
         }
       } else{
@@ -152,9 +205,9 @@ class GameJump : public Game {
       
     }
 
-    byte checkCollisionDown() {
+    bool checkCollisionDown() {
 
-      if(arr[Tux.positionX][Tux.positionY + 1] == 2) {
+      if(arr[(byte)Tux.positionX][(byte)Tux.positionY + 1] == 2) {
         return true;
       }
 
@@ -162,9 +215,9 @@ class GameJump : public Game {
       
     }
 
-    byte checkCollisionLeft() {
+    bool checkCollisionLeft() {
 
-      if(arr[Tux.positionX - 1][Tux.positionY] == 2 || Tux.positionX <= 0){
+      if(arr[(byte)Tux.positionX - 1][(byte)Tux.positionY] == 2 || Tux.positionX <= 0){
         return true;
       }
 
@@ -172,9 +225,9 @@ class GameJump : public Game {
       
     }
 
-    byte checkCollisionRight() {
+    bool checkCollisionRight() {
 
-      if(arr[Tux.positionX + 1][Tux.positionY] == 2){
+      if(arr[(byte)Tux.positionX + 1][(byte)Tux.positionY] == 2){
         return true;
       }
 
@@ -182,11 +235,43 @@ class GameJump : public Game {
       
     }
 
-    byte checkCollisionWithCoin() {
+    bool checkCollisionWithCoin(byte a = 0) {
 
-      if(arr[Tux.positionX][Tux.positionY] == 5){
+      if(!a){
+      if(arr[(byte)Tux.positionX][(byte)Tux.positionY] == 5){
         return true;
       }
+
+      return false;
+      }else if(a == 1) {
+        
+      if(arr[(byte)Tux.positionX+1][(byte)Tux.positionY] == 5){
+        return true;
+      }
+
+      return false;
+      }else if(a == 2) {
+        
+      if(arr[(byte)Tux.positionX-1][(byte)Tux.positionY] == 5){
+        return true;
+      }
+
+      return false;
+      }else {
+        
+      if(arr[(byte)Tux.positionX][(byte)Tux.positionY+1] == 5){
+        return true;
+      }
+
+      return false;
+      }
+        
+      
+    }
+
+    bool checkCollisionWithJumpy() {
+
+      if(Tux.positionX == Jumpy.positionX && Tux.positionY == Jumpy.positionY)return true;
 
       return false;
       
@@ -195,9 +280,9 @@ class GameJump : public Game {
     void placeTux() {
 
         Tux.positionX = 3;
-        for (byte i = 23; i < 0; i--) {
-          if(!(arr[3][i])) {
-            Tux.positionY = i;
+        for (char i = 23; i; i--) {
+          if((arr[3][(byte)i]) != 2) {
+            Tux.positionY = i - 2;
             break;
           }
         }
@@ -207,8 +292,8 @@ class GameJump : public Game {
     void placeJumpy() {
 
         Jumpy.positionX = 23;
-        for (byte i = 23; i < 0; i--) {
-          if(!(arr[23][i])) {
+        for (char i = 23; i < 0; i--) {
+          if(!(arr[23][(byte)i])) {
             Tux.positionY = i;
             break;
           }
@@ -219,7 +304,7 @@ class GameJump : public Game {
     void drawScene() {
 
       if(Tux.positionY >= 0)drawTile(Tux.positionX, Tux.positionY);
-      if(Jumpy.positionX >= 0 && Jumpy.positionY >= 0)drawTile(Jumpy.positionX, Jumpy.positionY);
+      //if(Jumpy.positionX >= 0 && Jumpy.positionY >= 0)drawTile(Jumpy.positionX, Jumpy.positionY);
       
     }
 
@@ -230,4 +315,4 @@ class GameJump : public Game {
       
     }
     
-}
+};

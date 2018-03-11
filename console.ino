@@ -410,6 +410,13 @@ void drawLogo(byte game) {
 
       break;
 
+    case 11: //Jump
+
+      drawCharacter(3, 9, CHARACT_J);
+      drawCharacter(7, 9, CHARACT_U);
+      drawCharacter(11,9, CHARACT_M);
+      drawCharacter(17,9, CHARACT_P);
+
   }
 }
 
