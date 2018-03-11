@@ -153,7 +153,7 @@ class GameUnderAttack : public Game {
          -1=up
          1=down
       */
-      return !digitalRead(buttonUp) ? -1 : !digitalRead(buttonDown) ? 1 : 0;
+      return isKeyPressed(A2K_UP) ? -1 : isKeyPressed(A2K_DOWN) ? 1 : 0;
 
     }
 

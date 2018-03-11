@@ -74,12 +74,14 @@ class GameBallCatch : public Game {
 
     void LetMove() {
 
-      if (!digitalRead(buttonLeft)) {
+      if (isKeyPressed(A2K_LEFT)) {
         Catcher.positionY--;
       }
-      if (!digitalRead(buttonRight)) {
+      if (isKeyPressed(A2K_RIGHT)) {
         Catcher.positionY++;
       }
+      resetKeyMap();
+      
       if (Catcher.positionY < 1)Catcher.positionY = 1;
       if (Catcher.positionY > 22)Catcher.positionY = 22;
 

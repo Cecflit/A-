@@ -116,15 +116,16 @@ class GameSpaceShoot : public Game {
 
     void LetMove() {
 
-      if (!digitalRead(buttonUp)) {
+      if (isKeyPressed(A2K_UP)) {
         Fire();
       }
-      if (!digitalRead(buttonLeft)) {
+      if (isKeyPressed(A2K_LEFT)) {
         Ship.positionX--;
       }
-      if (!digitalRead(buttonRight)) {
+      if (isKeyPressed(A2K_RIGHT)) {
         Ship.positionX++;
       }
+      resetKeyMap();
 
       if (Ship.positionX > 23)Ship.positionX = 0;
       if (Ship.positionX < 0)Ship.positionX = 23;

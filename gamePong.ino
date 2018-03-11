@@ -61,13 +61,14 @@ class GamePong : public Game {
         drawTile(0, Paddle.positionY - 1);
         drawTile(23, Paddle.positionY - 1);
       }
-      if (!digitalRead(buttonDown) && Paddle.positionY < 21) {
+      if (isKeyPressed(A2K_DOWN) && Paddle.positionY < 21) {
         clearTile(0, Paddle.positionY - 1);
         clearTile(23, Paddle.positionY - 1);
         Paddle.positionY++;
         drawTile(0, Paddle.positionY + 1);
         drawTile(23, Paddle.positionY + 1);
       }
+      resetKeyMap();
 
     }
 

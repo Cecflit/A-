@@ -36,7 +36,7 @@ class GameQuickReflex : public Game {
 
         if (Sequence[i] == 0) {
 
-          while (digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight)) {
+          while (!isKeyPressed(A2K_UP) && !isKeyPressed(A2K_DOWN) && !isKeyPressed(A2K_LEFT) && !isKeyPressed(A2K_RIGHT)) {
 
             wait(1);
 

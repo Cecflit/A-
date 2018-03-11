@@ -78,12 +78,13 @@ class GameMineRun : public Game {
     void moveRunner() {
 
       clearTile(2, Runner.positionY);
-      if (!digitalRead(buttonUp)) {
+      if (isKeyPressed(A2K_UP)) {
         Runner.positionY--;
       };
-      if (!digitalRead(buttonDown)) {
+      if (isKeyPressed(A2K_DOWN)) {
         Runner.positionY++;
       };
+      resetKeyMap();
 
       if (Runner.positionY < 0)Runner.positionY = 23;
       if (Runner.positionY > 23)Runner.positionY = 0;

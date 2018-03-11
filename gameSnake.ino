@@ -56,22 +56,23 @@ class GameSnake : public Game {
     void Loop() {
 
       //Direction change
-      if (!digitalRead(buttonUp) && !Snake.directionY) {
+      if (isKeyPressed(A2K_UP) && !Snake.directionY) {
         Snake.directionY = -1;
         Snake.directionX = 0;
       };
-      if (!digitalRead(buttonDown) && !Snake.directionY) {
+      if (isKeyPressed(A2K_DOWN) && !Snake.directionY) {
         Snake.directionY = 1;
         Snake.directionX = 0;
       };
-      if (!digitalRead(buttonLeft) && !Snake.directionX) {
+      if (isKeyPressed(A2K_LEFT) && !Snake.directionX) {
         Snake.directionY = 0;
         Snake.directionX = -1;
       };
-      if (!digitalRead(buttonRight) && !Snake.directionX) {
+      if (isKeyPressed(A2K_RIGHT) && !Snake.directionX) {
         Snake.directionY = 0;
         Snake.directionX = 1;
       };
+      resetKeyMap();
 
       //Head move
       int head_ = Snake.head;

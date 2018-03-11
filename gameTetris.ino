@@ -142,10 +142,10 @@ class GameTetris : public Game {
 
     void LetMove() {
 
-      if (!digitalRead(buttonLeft)) {
+      if(isKeyPressed(A2K_LEFT)) {
 
-        if (CanMoveLeft()) {
-          for (byte i = 0; i < 4; i++) {
+        if(CanMoveLeft()){
+          for(byte i = 0; i < 4; i++) {
             falling.bricksX[i]--;
           }
           DetectCollision();
@@ -153,10 +153,10 @@ class GameTetris : public Game {
 
       }
 
-      if (!digitalRead(buttonRight)) {
+      if(isKeyPressed(A2K_RIGHT)) {
 
-        if (CanMoveRight()) {
-          for (byte i = 0; i < 4; i++) {
+        if(CanMoveRight()){
+          for(byte i = 0; i < 4; i++) {
             falling.bricksX[i]++;
           }
           DetectCollision();
@@ -164,15 +164,15 @@ class GameTetris : public Game {
 
       }
 
-      if (!digitalRead(buttonUp)) {
-        if (CanRotate())Rotate();
+      if(isKeyPressed(A2K_UP)) {
+        if(CanRotate())Rotate();
       }
 
-      if (!digitalRead(buttonDown)) {
+      if(isKeyPressed(A2K_DOWN)) {
         Move();
       }
 
-
+      resetKeyMap();
     }
 
     void DetectCollision() {
