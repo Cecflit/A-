@@ -211,7 +211,7 @@ void renderScreen() {
       if (arr[i][j] == 1) {
         digitalWrite(j + 24, HIGH);
       }
-      if (arr[i][j] == 2 && !(fancyCounter % 5)) {
+      if (arr[i][j] == 2 && !(fancyCounter % 3)) {
         digitalWrite(j + 24, HIGH);
       }
       if (arr[i][j] == 3 && fancyCounter % 128 >= 64) {
