@@ -2,6 +2,7 @@ class GameTetris : public Game {
   private:
     
     bool LoopCounter = false;
+    byte Next;
     
     class tetromino {
     
@@ -18,11 +19,13 @@ class GameTetris : public Game {
     GameTetris() :
       Game(),
       LoopCounter(false),
+      Next(randomInteger(0, 7)),
       falling()
     {
       clearScreen();
       score = 0;
       DrawScene();
+      drawNew();
       New();
       Drop();
     }
@@ -51,6 +54,12 @@ class GameTetris : public Game {
     }
     
   private:
+
+    void drawNew() {
+      for (byte i = 0; i < 4; i++) {
+        toggleTile(bricks[Next].bricksX[i] + 18, bricks[Next].bricksY[i] + 10);
+      }
+    }
     
     void Rotate() {
     
@@ -129,7 +138,10 @@ class GameTetris : public Game {
     
     void New() {
     
-      byte ran = randomInteger(0, 7);
+      byte ran = Next;
+      drawNew();
+      Next = randomInteger(0, 7);
+      drawNew();
       for (byte i = 0; i < 4; i++) {
         falling.bricksX[i] = bricks[ran].bricksX[i] + 6;
         falling.bricksY[i] = bricks[ran].bricksY[i];
