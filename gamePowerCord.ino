@@ -21,7 +21,7 @@ class GamePowerCord : public Game {
     GamePowerCord() :
       Game(),
       Orientation(randomInteger(0, 4)),
-      LastPressed(!(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight))),
+      LastPressed(isKeyPressed(A2K_UP) || isKeyPressed(A2K_DOWN) || isKeyPressed(A2K_LEFT) || isKeyPressed(A2K_RIGHT)),
       Pass(0),
       Moving(),
       Dormant()
@@ -154,7 +154,7 @@ class GamePowerCord : public Game {
 
     bool AnyPressed() {
 
-      return !(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight));
+      return isKeyPressed(A2K_UP) || isKeyPressed(A2K_DOWN) || isKeyPressed(A2K_LEFT) || isKeyPressed(A2K_RIGHT);
 
     }
 
@@ -175,7 +175,7 @@ class GamePowerCord : public Game {
           }
         }
       }
-
+    
       if (both && !(Pass % 2)) {
         if (Dormant.forw) {
           Dormant.pos++;

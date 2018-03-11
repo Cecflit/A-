@@ -25,9 +25,16 @@
 #define CHARACT_Y 34
 #define CHARACT_Z 35
 
+#define A2K_UP 1
+#define A2K_DOWN 2
+#define A2K_LEFT 4
+#define A2K_RIGHT 8
+#define A2K_ENTER 16
+
 long fancyCounter = 0;
 int score = 0;
 char tickDuration = 6;
+byte keyMap = 0;
 
 //individual characters
 
@@ -142,15 +149,15 @@ const byte buttonDown = 49; //digital pin 49
 const byte buttonLeft = 50; //digital pin 50
 const byte buttonRight = 51; //digital pin 51
 const byte speaker = 52; //digital pin 52
-const byte extraGround = 53; //digital pin 53
+const byte buttonEnter = 53; //digital pin 53
 byte arr[24][24] = {};
 byte game = 0;
 
 void setup() {
 
   pinMode(speaker, OUTPUT);
-  pinMode(extraGround, OUTPUT);
-  digitalWrite(extraGround, 0);
+  pinMode(buttonEnter, INPUT_PULLUP);
+  //digitalWrite(extraGround, 0);
   pinMode(buttonUp, INPUT_PULLUP);
   pinMode(buttonDown, INPUT_PULLUP);
   pinMode(buttonLeft, INPUT_PULLUP);
@@ -162,6 +169,32 @@ void setup() {
     pinMode(i + 24, OUTPUT);
 
   }
+}
+
+void updateKeyMap() {
+  if (!digitalRead(buttonUp)) {
+    keyMap |= A2K_UP;
+  }
+  if (!digitalRead(buttonDown)) {
+    keyMap |= A2K_DOWN;
+  }
+  if (!digitalRead(buttonLeft)) {
+    keyMap |= A2K_LEFT;
+  }
+  if (!digitalRead(buttonRight)) {
+    keyMap |= A2K_RIGHT;
+  }
+  if (!digitalRead(buttonEnter)) {
+    keyMap |= A2K_ENTER;
+  }
+}
+
+byte resetKeyMap() {
+  keyMap = 0;
+}
+
+bool isKeyPressed(byte key) {
+  return keyMap & key;
 }
 
 void drawTile(byte x, byte y, byte type = 1) {
@@ -524,6 +557,7 @@ void wait(short time) {
 
   for (short i = 0; i < time * 10; i++) {
 
+    updateKeyMap();
     renderScreen();
 
   }

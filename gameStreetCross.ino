@@ -113,10 +113,11 @@ class GameStreetCross : public Game {
 
     void LetMove() {
 
-      if (!digitalRead(buttonUp))Crosser.positionY--;
-      if (!digitalRead(buttonDown))Crosser.positionY++;
-      if (!digitalRead(buttonLeft))Crosser.positionX--;
-      if (!digitalRead(buttonRight))Crosser.positionX++;
+      if (isKeyPressed(A2K_UP))Crosser.positionY--;
+      if (isKeyPressed(A2K_DOWN))Crosser.positionY++;
+      if (isKeyPressed(A2K_LEFT))Crosser.positionX--;
+      if (isKeyPressed(A2K_RIGHT))Crosser.positionX++;
+      resetKeyMap();
 
       if (Crosser.positionX < 0)Crosser.positionX = 23;
       if (Crosser.positionX > 23)Crosser.positionX = 0;
