@@ -189,7 +189,7 @@ void updateKeyMap() {
   }
 }
 
-byte resetKeyMap() {
+void resetKeyMap() {
   keyMap = 0;
 }
 
