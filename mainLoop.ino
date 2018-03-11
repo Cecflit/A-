@@ -33,7 +33,7 @@ void loop() {
 
   playSound(1);
   Game* g;
-  
+
   switch (game) {
     default:
     case 0:  g = new GameSnake; break;
@@ -48,12 +48,11 @@ void loop() {
     case 9:  g = new GameUnderAttack; break;
     case 10: g = new GameTetris; break;
   }
-  
-  //g->Setup();
+
   while (true) {
     g->Loop();
   }
   delete g;
-  
+
 }
 

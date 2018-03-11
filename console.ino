@@ -27,7 +27,7 @@
 
 long fancyCounter = 0;
 int score = 0;
-char tickDuration = 10;
+char tickDuration = 6;
 
 //individual characters
 
@@ -206,7 +206,7 @@ void renderScreen() {
   for (byte i = 0; i < 24; i++) {
     digitalWrite(i, LOW);
 
-    
+
     for (byte j = 0; j < 24; j++) {
       if (arr[i][j] == 1) {
         digitalWrite(j + 24, HIGH);
@@ -225,7 +225,7 @@ void renderScreen() {
       }
     }
 
-    
+
     delayMicroseconds(10);
     for (byte j = 0; j < 24; j++) {
       if (arr[i][j]) {
@@ -279,7 +279,7 @@ void drawLogo(byte game) {
       drawCharacter(17, 6, CHARACT_E);
       drawCharacter(6, 12, CHARACT_R);
       drawCharacter(10, 12, CHARACT_U);
-      drawCharacter(14, 12, CHARACT_N);   
+      drawCharacter(14, 12, CHARACT_N);
 
       break;
 
@@ -309,7 +309,7 @@ void drawLogo(byte game) {
       drawCharacter(4, 12, CHARACT_C);
       drawCharacter(8, 12, CHARACT_O);
       drawCharacter(12, 12, CHARACT_R);
-      drawCharacter(16, 12, CHARACT_D);         
+      drawCharacter(16, 12, CHARACT_D);
 
       break;
 
@@ -318,7 +318,7 @@ void drawLogo(byte game) {
       drawCharacter(3, 9, CHARACT_P);
       drawCharacter(7, 9, CHARACT_O);
       drawCharacter(11, 9, CHARACT_N);
-      drawCharacter(16, 9, CHARACT_G);    
+      drawCharacter(16, 9, CHARACT_G);
 
       break;
 
@@ -334,7 +334,7 @@ void drawLogo(byte game) {
       drawCharacter(6, 12, CHARACT_R);
       drawCharacter(10, 12, CHARACT_O);
       drawCharacter(14, 12, CHARACT_S);
-      drawCharacter(18, 12, CHARACT_S);           
+      drawCharacter(18, 12, CHARACT_S);
 
       break;
 
@@ -349,7 +349,7 @@ void drawLogo(byte game) {
       drawCharacter(7, 12, CHARACT_A);
       drawCharacter(11, 12, CHARACT_T);
       drawCharacter(15, 12, CHARACT_C);
-      drawCharacter(19, 12, CHARACT_H);          
+      drawCharacter(19, 12, CHARACT_H);
 
       break;
 
@@ -363,7 +363,7 @@ void drawLogo(byte game) {
       drawCharacter(6, 12, CHARACT_A);
       drawCharacter(10, 12, CHARACT_T);
       drawCharacter(14, 12, CHARACT_C);
-      drawCharacter(18, 12, CHARACT_H);         
+      drawCharacter(18, 12, CHARACT_H);
 
       break;
 
@@ -379,7 +379,7 @@ void drawLogo(byte game) {
       drawCharacter(8, 12, CHARACT_F);
       drawCharacter(12, 12, CHARACT_L);
       drawCharacter(16, 12, CHARACT_E);
-      drawCharacter(20, 12, CHARACT_X);           
+      drawCharacter(20, 12, CHARACT_X);
 
       break;
 
@@ -395,7 +395,7 @@ void drawLogo(byte game) {
       drawCharacter(8, 12, CHARACT_T);
       drawCharacter(12, 12, CHARACT_A);
       drawCharacter(16, 12, CHARACT_C);
-      drawCharacter(20, 12, CHARACT_K);           
+      drawCharacter(20, 12, CHARACT_K);
 
       break;
 
@@ -404,17 +404,13 @@ void drawLogo(byte game) {
       drawCharacter(1, 9, CHARACT_T);
       drawCharacter(5, 9, CHARACT_E);
       drawCharacter(9, 9, CHARACT_T);
-      drawCharacter(13,9, CHARACT_R);
-      drawCharacter(17,9, CHARACT_I);
-      drawCharacter(19,9, CHARACT_S);      
+      drawCharacter(13, 9, CHARACT_R);
+      drawCharacter(17, 9, CHARACT_I);
+      drawCharacter(19, 9, CHARACT_S);
 
       break;
 
   }
-
-  //drawTickDuration();
-  //renderScreen();
-
 }
 
 void drawTickDuration() {
@@ -477,9 +473,9 @@ void viewScore() {
 
 void renderScore(byte digit, byte slot) {
 
-  switch(slot) {
-    case 1: 
-      switch(digit) {
+  switch (slot) {
+    case 1:
+      switch (digit) {
         case 0: drawCharacter(6, 9, 0); break;
         case 1: drawCharacter(8, 9, 1); break;
         case 2: drawCharacter(6, 9, 2); break;
@@ -492,8 +488,8 @@ void renderScore(byte digit, byte slot) {
         case 9: drawCharacter(6, 9, 9); break;
       }
       break;
-    case 2: 
-      switch(digit) {
+    case 2:
+      switch (digit) {
         case 0: drawCharacter(10, 9, 0); break;
         case 1: drawCharacter(12, 9, 1); break;
         case 2: drawCharacter(10, 9, 2); break;
@@ -506,8 +502,8 @@ void renderScore(byte digit, byte slot) {
         case 9: drawCharacter(10, 9, 9); break;
       }
       break;
-    case 3: 
-      switch(digit) {
+    case 3:
+      switch (digit) {
         case 0: drawCharacter(14, 9, 0); break;
         case 1: drawCharacter(16, 9, 1); break;
         case 2: drawCharacter(14, 9, 2); break;
@@ -538,7 +534,7 @@ int randomInteger(int min_, int max_) {
 
   return floor(random(min_, max_));
 
-  
+
 
 }
 
@@ -610,9 +606,9 @@ void playSound(byte sound) {
 
 void drawCharacter(byte _x, byte _y, byte ch) {
 
-  if(ch == 18) ch = 1;
+  if (ch == 18) ch = 1;
 
-  switch(ch) {
+  switch (ch) {
 
     case 0: //0
 
@@ -620,7 +616,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char0_x[i] + _x, char0_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 1: //1 / I
 
@@ -628,7 +624,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char1_x[i] + _x, char1_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 2: //2
 
@@ -636,7 +632,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char2_x[i] + _x, char2_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 3: //3
 
@@ -644,7 +640,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char3_x[i] + _x, char3_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 4: //4
 
@@ -652,7 +648,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char4_x[i] + _x, char4_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 5: //5
 
@@ -660,7 +656,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char5_x[i] + _x, char5_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 6: //6
 
@@ -668,7 +664,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char6_x[i] + _x, char6_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 7: //7
 
@@ -676,7 +672,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char7_x[i] + _x, char7_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 8: //8
 
@@ -684,7 +680,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char8_x[i] + _x, char8_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 9: //9
 
@@ -692,7 +688,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(char9_x[i] + _x, char9_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 10: //A
 
@@ -700,7 +696,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charA_x[i] + _x, charA_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 11: //B
 
@@ -708,7 +704,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charB_x[i] + _x, charB_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 12: //C
 
@@ -716,7 +712,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charC_x[i] + _x, charC_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 13: //D
 
@@ -724,7 +720,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charD_x[i] + _x, charD_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 14: //E
 
@@ -732,7 +728,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charE_x[i] + _x, charE_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 15: //F
 
@@ -740,7 +736,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charF_x[i] + _x, charF_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 16: //G
 
@@ -748,7 +744,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charG_x[i] + _x, charG_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 17: //H
 
@@ -756,7 +752,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charH_x[i] + _x, charH_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 19: //J
 
@@ -764,7 +760,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charJ_x[i] + _x, charJ_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 20: //K
 
@@ -772,7 +768,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charK_x[i] + _x, charK_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 21: //L
 
@@ -780,7 +776,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charL_x[i] + _x, charL_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 22: //M
 
@@ -788,7 +784,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charM_x[i] + _x, charM_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 23: //N
 
@@ -796,7 +792,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charN_x[i] + _x, charN_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 24: //O
 
@@ -804,7 +800,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charO_x[i] + _x, charO_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 25: //P
 
@@ -812,7 +808,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charP_x[i] + _x, charP_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 26: //Q
 
@@ -820,7 +816,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charQ_x[i] + _x, charQ_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 27: //R
 
@@ -828,7 +824,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charR_x[i] + _x, charR_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 28: //S
 
@@ -836,7 +832,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charS_x[i] + _x, charS_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 29: //T
 
@@ -844,7 +840,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charT_x[i] + _x, charT_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 30: //U
 
@@ -852,7 +848,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charU_x[i] + _x, charU_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 31: //V
 
@@ -860,7 +856,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charV_x[i] + _x, charV_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 32: //W
 
@@ -868,7 +864,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charW_x[i] + _x, charW_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 33: //X
 
@@ -876,7 +872,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charX_x[i] + _x, charX_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 34: //Y
 
@@ -884,7 +880,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charY_x[i] + _x, charY_y[i] + _y);
       }
 
-    break;
+      break;
 
     case 35: //Z
 
@@ -892,8 +888,8 @@ void drawCharacter(byte _x, byte _y, byte ch) {
         toggleTile(charZ_x[i] + _x, charZ_y[i] + _y);
       }
 
-    break;
-    
+      break;
+
   }
-  
+
 }
