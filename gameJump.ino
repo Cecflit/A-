@@ -313,7 +313,7 @@ class GameJump : public Game {
       Jumpy.positionX = 23;
       for (char i = 23; i > 0; i--) {
         if (!(arr[23][(byte)i])) {
-          Jumpy.positionY = i - 1;
+          Jumpy.positionY = i - randomInteger(1, 6);
           break;
         }
       }
