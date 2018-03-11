@@ -7,14 +7,17 @@ class GamePowerCord : public Game {
     class line {
     
       public:
-        int pos = 0;
-        bool forw = true;
-        line() {}
+        int pos;
+        bool forw;
+        line(bool forw_) :
+          pos(randomInteger(0, 24)),
+          forw(forw_)
+        {}
     
     };
     
-    line Moving = line();
-    line Dormant = line();
+    line Moving;
+    line Dormant;
     
   public:  
   
@@ -23,14 +26,14 @@ class GamePowerCord : public Game {
       Orientation(randomInteger(0, 4)),
       LastPressed(!(digitalRead(buttonUp) && digitalRead(buttonDown) && digitalRead(buttonLeft) && digitalRead(buttonRight))),
       Pass(0),
-      Moving(),
-      Dormant()
+      Moving(true),
+      Dormant(false)
     {
-      Dormant.forw = false;
+      //Dormant.forw = false;
       clearScreen();
       score = 0;
-      Moving.pos = randomInteger(0, 24);
-      Dormant.pos = randomInteger(0, 24);
+      //Moving.pos = randomInteger(0, 24);
+      //Dormant.pos = randomInteger(0, 24);
     }      
     
     ~GamePowerCord() {}

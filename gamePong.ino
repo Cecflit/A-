@@ -8,7 +8,12 @@ class GamePong : public Game {
         int positionY = 0;
         int directionX = 0;
         int directionY = 0;
-        ball() {}
+        ball(int posX, int posY, int dirX, int dirY) :
+          positionX(posX),
+          positionY(posY),
+          directionX(dirX),
+          directionY(dirY)
+        {}
     
     };
     
@@ -16,26 +21,28 @@ class GamePong : public Game {
     
       public:
         int positionY = 0;
-        paddle() {}
+        paddle(int y) :
+          positionY(y)
+        {}
     
     };
     
     
-    paddle Paddle = paddle();
-    ball Ball = ball();
+    paddle Paddle;
+    ball Ball;
     
   public:
     
     GamePong() :
       Game(),
-      Paddle(),
-      Ball()
+      Paddle(12),
+      Ball(7, 8, 1, 1)
     {
-      Paddle.positionY = 12;
+      /*Paddle.positionY = 12;
       Ball.positionX = 7;
       Ball.positionY = 8;
       Ball.directionX = 1;
-      Ball.directionY = 1;
+      Ball.directionY = 1;*/
       
       DrawScreen();
     }

@@ -8,7 +8,10 @@ class GameBallCatch : public Game {
       public:
         int positionX;
         int positionY;
-        fallBall() {}
+        fallBall(int x, int y) :
+          positionX(x),
+          positionY(y)
+        {}
     
     };
     
@@ -16,32 +19,34 @@ class GameBallCatch : public Game {
     
       public:
         int positionY = 0;
-        paddle() {}
+        paddle(int y) :
+          positionY(y)
+        {}
     
     };
     
-    fallBall Ball0 = fallBall();
-    fallBall Ball1 = fallBall();
-    fallBall Ball2 = fallBall();
-    fallBall Ball3 = fallBall();
-    fallBall Ball4 = fallBall();
+    fallBall Ball0;
+    fallBall Ball1;
+    fallBall Ball2;
+    fallBall Ball3;
+    fallBall Ball4;
     
     //uses class paddle written for gamePong, positionY is used as positionX
-    paddle Catcher = paddle();
+    paddle Catcher;
     
   public:
   
     GameBallCatch() :
       Game(),
       LoopCounter(0),
-      Ball0(),
-      Ball1(),
-      Ball2(),
-      Ball3(),
-      Ball4(),
-      Catcher()
+      Ball0(12, 0),
+      Ball1(12, 5),
+      Ball2(12, 10),
+      Ball3(12, 15),
+      Ball4(12, 20),
+      Catcher(12)
     {
-      Ball0.positionX = 12;
+      /*Ball0.positionX = 12;
       Ball0.positionY = 0;
       Ball1.positionX = 12;
       Ball1.positionY = 5;
@@ -51,7 +56,7 @@ class GameBallCatch : public Game {
       Ball3.positionY = 15;
       Ball4.positionX = 12;
       Ball4.positionY = 20;
-      Catcher.positionY = 12;
+      Catcher.positionY = 12;*/
       score = 0;
     }
     

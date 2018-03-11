@@ -4,26 +4,36 @@ class GameSnake : public Game {
     class snake {
     
       public:
-        int directionX = 1;
-        int directionY = 0;
-        int head = 0;
-        int tail = 0;
-        int tailPiecesX[574] = {};
-        int tailPiecesY[574] = {};
-        snake() {}
+        int directionX;
+        int directionY;
+        int head;
+        int tail;
+        int tailPiecesX[574];
+        int tailPiecesY[574];
+        snake() :
+          directionX(1),
+          directionY(0),
+          head(0),
+          tail(0),
+          tailPiecesX({}),
+          tailPiecesY({})
+        {}
     };
     
-    snake Snake = snake();
+    snake Snake;
     
     class food {
     
       public:
-        int positionX = 0;
-        int positionY = 0;
-        food() {}
+        int positionX;
+        int positionY;
+        food() :
+          positionX(0),
+          positionY(0)
+        {}
     };
     
-    food Food = food();
+    food Food;
     
   public:
   

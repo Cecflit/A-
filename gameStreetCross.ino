@@ -8,55 +8,61 @@ class GameStreetCross : public Game {
       public:
         int lane;
         char positionX;
-        vehicle () {}
+        vehicle (int l, char p) :
+          lane(l),
+          positionX(p)
+        {}
     
     };
     
-    vehicle Lane0_0 = vehicle();
-    vehicle Lane0_1 = vehicle();
-    vehicle Lane0_2 = vehicle();
-    vehicle Lane1_0 = vehicle();
-    vehicle Lane1_1 = vehicle();
-    vehicle Lane1_2 = vehicle();
-    vehicle Lane2_0 = vehicle();
-    vehicle Lane2_1 = vehicle();
-    vehicle Lane2_2 = vehicle();
-    vehicle Lane3_0 = vehicle();
-    vehicle Lane3_1 = vehicle();
-    vehicle Lane3_2 = vehicle();
+    vehicle Lane0_0;
+    vehicle Lane0_1;
+    vehicle Lane0_2;
+    vehicle Lane1_0;
+    vehicle Lane1_1;
+    vehicle Lane1_2;
+    vehicle Lane2_0;
+    vehicle Lane2_1;
+    vehicle Lane2_2;
+    vehicle Lane3_0;
+    vehicle Lane3_1;
+    vehicle Lane3_2;
     
     class crosser {
     
       public:
         int positionX;
         int positionY;
-        crosser () {}
+        crosser (int x, int y) :
+          positionX(x),
+          positionY(y)
+        {}
     
     };
     
-    crosser Crosser = crosser();
+    crosser Crosser;
     
   public:
   
     GameStreetCross() :
       Game(),
       LastUp(false),
-      Lane0_0(),
-      Lane0_1(),
-      Lane0_2(),
-      Lane1_0(),
-      Lane1_1(),
-      Lane1_2(),
-      Lane2_0(),
-      Lane2_1(),
-      Lane2_2(),
-      Lane3_0(),
-      Lane3_1(),
-      Lane3_2(),
-      Crosser()
+      Lane0_0(4, 0),
+      Lane0_1(4, 8),
+      Lane0_2(4, 16),
+      Lane1_0(9, 4),
+      Lane1_1(9, 12),
+      Lane1_2(9, 20),
+      Lane2_0(14, 0),
+      Lane2_1(14, 8),
+      Lane2_2(14, 16),
+      Lane3_0(19, 4),
+      Lane3_1(19, 12),
+      Lane3_2(19, 20),
+      Crosser(11, 22)
     {
       score = 0;
-      Lane0_0.lane = 4;
+      /*Lane0_0.lane = 4;
       Lane0_1.lane = 4;
       Lane0_2.lane = 4;
       Lane1_0.lane = 9;
@@ -83,7 +89,7 @@ class GameStreetCross : public Game {
       Lane3_2.positionX = 20;
     
       Crosser.positionX = 11;
-      Crosser.positionY = 22;
+      Crosser.positionY = 22;*/
     
       clearScreen();
       DrawScreen();
