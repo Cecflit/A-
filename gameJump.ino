@@ -44,7 +44,7 @@ class GameJump : public Game {
         playSound(3);
       }
       drawScene();
-      wait(1);
+      quickWait(tickDuration + 4);
     }
 
   private:

@@ -528,13 +528,17 @@ void renderScore(byte digit, byte slot) {
 }
 
 void wait(short time) {
+  
+    for (short i = 0; i < time * 10; i++) {
+      renderScreen();
+     }
+}
 
-  for (short i = 0; i < time * 10; i++) {
-
-    renderScreen();
-
-  }
-
+void quickWait(short time) {
+  
+    for (short i = 0; i < time; i++) {
+      renderScreen();
+     }
 }
 
 int randomInteger(int min_, int max_) {
