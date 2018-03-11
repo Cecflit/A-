@@ -101,10 +101,10 @@ class GameTetris : public Game {
     
     void Move() {
     
+      DetectCollision();
       for (byte i = 0; i < 4; i++) {
         falling.bricksY[i]++;
       }
-      DetectCollision();
       
     }
     
