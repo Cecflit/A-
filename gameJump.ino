@@ -13,6 +13,7 @@ class GameJump : public Game {
     byte biome; //0 = LAND; 1 = JUMPS
     Penguin Tux = Penguin();
     Penguin Jumpy = Penguin();
+    Penguin OverJumpy = Penguin();
 
   public:
 
@@ -26,46 +27,53 @@ class GameJump : public Game {
       Jumpy.jumpCounter = 0;
       Jumpy.positionX = -1;
       Jumpy.positionY = 5;
+      OverJumpy.positionX = -1;
+      OverJumpy.positionY = 4;
       generateInit();
     }
 
     void Loop() {
-      loopCounter++;
       if (loopCounter >= 60) {
         loopCounter = 0;
-        //biome = randomInteger(0, 2);
+        biome = randomInteger(0, 2);
       }
       letMove();
       moveJumpy();
-      if (!(checkCollisionDown()) && !Tux.jumpCounter)moveDown();
-      if (checkCollisionWithJumpy())endGame();
+      if (!(checkCollisionDown()) && !Tux.jumpCounter) {
+        moveDown();
+        if (checkCollisionWithVoid())endGame();
+      }
+      if (checkCollisionWithJumpy() || checkCollisionWithVoid())endGame();
       if (checkCollisionWithCoin()) {
         score++;
         playSound(3);
       }
       drawScene();
-      quickWait(tickDuration + 4);
+      quickWait(2 * tickDuration + 1);
     }
 
   private:
 
     void moveJumpy() {
       clearScene(true);
-      if(Jumpy.jumpCounter && Jumpy.positionX >= 0) {
+      if (Jumpy.jumpCounter && Jumpy.positionX >= 0) {
         Jumpy.positionY--;
         Jumpy.jumpCounter--;
-      } else if (Jumpy.positionX >= 0 && (arr[(byte)Jumpy.positionX][(byte)Jumpy.positionY+1]) != 2) {
+      } else if (Jumpy.positionX >= 0 && (arr[(byte)Jumpy.positionX][(byte)Jumpy.positionY + 1]) != 2) {
         Jumpy.positionY++;
       }
-      if(Jumpy.positionX >= 0) {
-        if(arr[(byte)Jumpy.positionX][(byte)Jumpy.positionY+1] == 2) {
-          Jumpy.jumpCounter = 6;
+      if (Jumpy.positionX >= 0) {
+        if (arr[(byte)Jumpy.positionX][(byte)Jumpy.positionY + 1] == 2) {
+          Jumpy.jumpCounter = 5;
         }
       }
+      OverJumpy.positionX = Jumpy.positionX;
+      OverJumpy.positionY = Jumpy.positionY - 1;
     }
 
     void moveScreen() {
 
+      loopCounter++;
       clearScene();
       if (Jumpy.positionX >= 0)Jumpy.positionX--;
       for (byte i = 0; i < 23; i++) {
@@ -90,40 +98,102 @@ class GameJump : public Game {
     }
 
     void generateColumn(byte column) {
+      /*
+         BIOMES::
 
-      if (column) {
+         0 = LAND - no holes, no crazy terrain, no ceiling, 10% jumpies, 1/7 coins
+         1 = JUMPS - mostly holes up to 5 pixels wide, no crazy terrain, no ceiling, 0% jumpies, 1/2 coins on land
+
+      */
+      if (!biome) {
+
+        if (column) {
+
+          char height;
+          for (byte i = 0; i < 24; i++) {
+            if (arr[column - 1][23 - i] != 2) {
+              height = i - 1;
+              break;
+            } else {
+              height = 23;
+            }
+          }
+
+          if (!(randomInteger(0, 6)))height += (char)randomInteger(-5, 5);
+          if (height > 15)height = 15;
+          if (height < 1)height = 1;
+          for (byte i = 0; i <= height; i++) {
+            arr[column][23 - i] = 2;
+          }
+
+        } else {
+
+          char height = randomInteger(5, 12);
+          for (byte i = 0; i <= height; i++) {
+            arr[0][23 - i] = 2;
+          }
+
+        }
+
+        if (column == 23 && !(randomInteger(0, 11)) && Jumpy.positionX < 0) {
+          placeJumpy();
+        }
+
+      } else if (biome == 1) {
 
         char height;
-        for (byte i = 0; i < 24; i++) {
-          if (arr[column - 1][23 - i] != 2) {
-            height = i - 1;
+        char width = getWidth();
+        if (width < 0)width = 0;
+        for (byte i = 1; i < 24; i++) {
+          if (arr[23 - width - 1][i] == 2) {
+            height = 24 - i;
             break;
           } else {
-            height = 23;
+            height = 12;
           }
         }
-
-        if (!(randomInteger(0, 6)))height += (char)randomInteger(-6, 4);
+        width = getWidth();
+        if (!(randomInteger(0, 5)))height += (char)randomInteger(-2, 3);
         if (height > 15)height = 15;
-        if (height < 1)height = 1;
-        for (byte i = 0; i <= height; i++) {
-          arr[column][23 - i] = 2;
+        if (height < 3)height = 5;
+        if ((width > 7) || ((width > 0 && width < 8) && !(randomInteger(0, 8))) || ((width < -5) && randomInteger(0, 15)) || (width < 0 && width >= -5)) {
+          for (byte i = 0; i < height; i++) {
+            arr[column][23 - i] = 2;
+          }
+        } else {
+          for (byte i = 0; i < 24; i++) {
+            arr[column][i] = 0;
+          }
+        }
+          if (column == 23 && !(randomInteger(0, 11)) && Jumpy.positionX < 0 && width < -2) {
+            placeJumpy();
         }
 
-      } else {
-
-        char height = randomInteger(5, 12);
-        for (byte i = 0; i <= height; i++) {
-          arr[0][23 - i] = 2;
-        }
-
-      }
-
-      if (column == 23 && !(randomInteger(0, 11)) && Jumpy.positionX < 0 && !biome) {
-        placeJumpy();
       }
 
     }
+
+    char getWidth() {
+      char res = 0;
+      for (byte i = 1; i < 9; i++) {
+        if (arr[23 - i][23] != 2) {
+          res = i;
+        } else {
+          break;
+        }
+      }
+      if (!res) {
+        for (byte i = 1; i < 24; i++) {
+          if (arr[23 - i][23] == 2) {
+            res = 0 - i;
+          } else {
+            break;
+          }
+        }
+      }
+      return res;
+    }
+
 
     void generateInit() {
 
@@ -195,6 +265,17 @@ class GameJump : public Game {
 
     void letMove() {
 
+      if (!(digitalRead(buttonUp))) {
+        if (arr[(byte)Tux.positionX][(byte)Tux.positionY + 1] == 2) {
+          Tux.jumpCounter = 6;
+          moveUp();
+        } else if (Tux.jumpCounter) {
+          moveUp();
+        }
+      } else {
+        Tux.jumpCounter = 0;
+      }
+
       if (!(digitalRead(buttonLeft))) {
 
         if (!(checkCollisionLeft())) {
@@ -211,16 +292,7 @@ class GameJump : public Game {
 
       }
 
-      if (!(digitalRead(buttonUp))) {
-        if (arr[(byte)Tux.positionX][(byte)Tux.positionY + 1] == 2) {
-          Tux.jumpCounter = 6;
-          moveUp();
-        } else if (Tux.jumpCounter) {
-          moveUp();
-        }
-      } else {
-        Tux.jumpCounter = 0;
-      }
+
 
     }
 
@@ -291,9 +363,14 @@ class GameJump : public Game {
     bool checkCollisionWithJumpy() {
 
       if (Tux.positionX == Jumpy.positionX && Tux.positionY == Jumpy.positionY)return true;
-
+      if (Tux.positionX == OverJumpy.positionX && Tux.positionY == OverJumpy.positionY)return true;
       return false;
 
+    }
+
+    bool checkCollisionWithVoid() {
+      if (Tux.positionY >= 23)return true;
+      return false;
     }
 
     void placeTux() {
@@ -317,13 +394,15 @@ class GameJump : public Game {
           break;
         }
       }
-
+      OverJumpy.positionX = Jumpy.positionX;
+      OverJumpy.positionY = Jumpy.positionY - 1;
     }
 
     void drawScene(bool jmp = false) {
 
       if (Tux.positionY >= 0 && !jmp)drawTile(Tux.positionX, Tux.positionY);
-      if(Jumpy.positionX >= 0 && Jumpy.positionY >= 0)drawTile(Jumpy.positionX, Jumpy.positionY);
+      if (Jumpy.positionX >= 0 && Jumpy.positionY >= 0)drawTile(Jumpy.positionX, Jumpy.positionY);
+      if (OverJumpy.positionX >= 0 && OverJumpy.positionY >= 0)drawTile(OverJumpy.positionX, OverJumpy.positionY);
 
     }
 
@@ -331,6 +410,7 @@ class GameJump : public Game {
 
       if (Tux.positionY >= 0 && !jmp)clearTile(Tux.positionX, Tux.positionY);
       if (Jumpy.positionX >= 0 && Jumpy.positionY >= 0)clearTile(Jumpy.positionX, Jumpy.positionY);
+      if (OverJumpy.positionX >= 0 && OverJumpy.positionY >= 0)clearTile(OverJumpy.positionX, OverJumpy.positionY);
 
     }
 
