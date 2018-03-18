@@ -40,8 +40,8 @@ const byte char1_y[5] = {0, 1, 2, 3, 4};
 const byte char2_x[11] = {0, 1, 2, 2, 0, 1, 2, 0, 0, 1, 2};
 const byte char2_y[11] = {0, 0, 0, 1, 2, 2, 2, 3, 4, 4, 4};
 
-const byte char3_x[10] = {0, 1, 2, 2, 1, 2, 2, 0, 1, 2};
-const byte char3_y[10] = {0, 0, 0, 1, 2, 2, 3, 4, 4, 4};
+const byte char3_x[11] = {0, 1, 2, 2, 1, 2, 2, 0, 1, 2, 0};
+const byte char3_y[11] = {0, 0, 0, 1, 2, 2, 3, 4, 4, 4, 2};
 
 const byte char4_x[9] = {0, 2, 0, 2, 0, 1, 2, 2, 2};
 const byte char4_y[9] = {0, 0, 1, 1, 2, 2, 2, 3, 4};
@@ -647,7 +647,7 @@ void drawCharacter(byte _x, byte _y, byte ch) {
 
     case 3: //3
 
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 11; i++) {
         toggleTile(char3_x[i] + _x, char3_y[i] + _y);
       }
 
