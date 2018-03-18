@@ -25,7 +25,7 @@ void loop() {
       if (game > 11)game = 0;
       drawLogo(game);
     }
-    wait(10);
+    wait(6);
 
   }
 
