@@ -410,6 +410,13 @@ void drawLogo(byte game) {
 
       break;
 
+    case 11: //Jump
+
+      drawCharacter(3, 9, CHARACT_J);
+      drawCharacter(7, 9, CHARACT_U);
+      drawCharacter(11,9, CHARACT_M);
+      drawCharacter(17,9, CHARACT_P);
+
   }
 }
 
@@ -521,13 +528,17 @@ void renderScore(byte digit, byte slot) {
 }
 
 void wait(short time) {
+  
+    for (short i = 0; i < time * 10; i++) {
+      renderScreen();
+     }
+}
 
-  for (short i = 0; i < time * 10; i++) {
-
-    renderScreen();
-
-  }
-
+void quickWait(short time) {
+  
+    for (short i = 0; i < time; i++) {
+      renderScreen();
+     }
 }
 
 int randomInteger(int min_, int max_) {
