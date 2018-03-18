@@ -27,7 +27,7 @@
 
 long fancyCounter = 0;
 int score = 0;
-char tickDuration = 6;
+char tickDuration = 12;
 
 //individual characters
 
@@ -203,23 +203,23 @@ void unrenderScreen() { //flashes the screen
 
 void renderScreen() {
 
-  for (byte i = 0; i < 24; i++) {
+  for (byte i = 0; i != 24; ++i) {
     digitalWrite(i, LOW);
 
 
-    for (byte j = 0; j < 24; j++) {
+    for (byte j = 0; j != 24; ++j && !(j+24)) {
+      if (arr[i][j] == 2 && !(fancyCounter % 4)) {
+        digitalWrite(j + 24, HIGH);
+      } else 
       if (arr[i][j] == 1) {
         digitalWrite(j + 24, HIGH);
-      }
-      if (arr[i][j] == 2 && !(fancyCounter % 5)) {
-        digitalWrite(j + 24, HIGH);
-      }
+      } else
       if (arr[i][j] == 3 && fancyCounter % 128 >= 64) {
         digitalWrite(j + 24, HIGH);
-      }
+      } else
       if (arr[i][j] == 4 && fancyCounter % 64 >= 32) {
         digitalWrite(j + 24, HIGH);
-      }
+      } else
       if (arr[i][j] == 5 && fancyCounter % 32 >= 16) {
         digitalWrite(j + 24, HIGH);
       }
@@ -227,7 +227,7 @@ void renderScreen() {
 
 
     delayMicroseconds(10);
-    for (byte j = 0; j < 24; j++) {
+    for (byte j = 0; j != 24; ++j) {
       if (arr[i][j]) {
         digitalWrite(j + 24, LOW);
       }
