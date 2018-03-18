@@ -121,7 +121,10 @@ class GameBallCatch : public Game {
 
 
 
-      if (Ball0.positionY == 23 || Ball1.positionY == 23 || Ball2.positionY == 23 || Ball3.positionY == 23 || Ball4.positionY == 23)endGame();
+      if (Ball0.positionY == 23 || Ball1.positionY == 23 || Ball2.positionY == 23 || Ball3.positionY == 23 || Ball4.positionY == 23) {
+        DrawScreen();
+        endGame();
+      }
     }
 
     void DrawScreen() {

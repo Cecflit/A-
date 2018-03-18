@@ -99,7 +99,10 @@ class GameSpaceShoot : public Game {
 
           Asteroid.coordinates[i][1]++;
 
-          if (Asteroid.coordinates[i][1] == 23)endGame();
+          if (Asteroid.coordinates[i][1] == 23) {
+            DrawScene();
+            endGame();
+          }
           if (Asteroid.coordinates[i][0] == Ship.positionX && Asteroid.coordinates[i][1] == 21)endGame();
         }
 
