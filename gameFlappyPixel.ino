@@ -98,7 +98,10 @@ class GameFlappyPixel : public Game {
       if(Bird.positionY < 0)Bird.positionY = 0;
     } else {
       Bird.positionY++;
-      if(Bird.positionY > 23)endGame();
+      if(Bird.positionY > 23) {
+        drawScene();
+        endGame();
+      }
     }
     
   }
@@ -125,15 +128,8 @@ class GameFlappyPixel : public Game {
   }
 
   bool checkCollision() {
-/*
-    if(arr[2][(byte)Bird.positionY]) {
-      //drawTile(2, (byte)Bird.positionY);
-      return true;
-    }
-    return false;
-*/
 
-    if((Pipe0.positionX == 2 && (Bird.positionY < Pipe0.holeTopPosition || Bird.positionY > Pipe0.holeTopPosition + Pipe0.holeSize)) || (Pipe1.positionX == 2 && (Bird.positionY < Pipe1.holeTopPosition || Bird.positionY > Pipe1.holeTopPosition + Pipe1.holeSize)) || (Pipe2.positionX == 2 && (Bird.positionY < Pipe2.holeTopPosition || Bird.positionY > Pipe2.holeTopPosition + Pipe2.holeSize)))return true;
+    if((Pipe0.positionX == 2 && (Bird.positionY < Pipe0.holeTopPosition || Bird.positionY >= Pipe0.holeTopPosition + Pipe0.holeSize)) || (Pipe1.positionX == 2 && (Bird.positionY < Pipe1.holeTopPosition || Bird.positionY >= Pipe1.holeTopPosition + Pipe1.holeSize)) || (Pipe2.positionX == 2 && (Bird.positionY < Pipe2.holeTopPosition || Bird.positionY >= Pipe2.holeTopPosition + Pipe2.holeSize)))return true;
     return false;
 
     
