@@ -165,7 +165,7 @@ class GameJump : public Game {
             arr[column][i] = 0;
           }
         }
-          if (column == 23 && !(randomInteger(0, 11)) && Jumpy.positionX < 0 && width < -2) {
+          if (column == 23 && !(randomInteger(0, 11)) && Jumpy.positionX < 0 && width < -2 && arr[23][23] == 2) {
             placeJumpy();
         }
 
