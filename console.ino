@@ -417,6 +417,22 @@ void drawLogo(byte game) {
       drawCharacter(11,9, CHARACT_M);
       drawCharacter(17,9, CHARACT_P);
 
+      break;
+
+    case 12: //Flappy Pixel
+
+      drawCharacter(0, 6, CHARACT_F);
+      drawCharacter(4, 6, CHARACT_L);
+      drawCharacter(8, 6, CHARACT_A);
+      drawCharacter(12,6, CHARACT_P);
+      drawCharacter(16,6, CHARACT_P);
+      drawCharacter(20,6, CHARACT_Y);
+      drawCharacter(3,12, CHARACT_P);
+      drawCharacter(7,12, CHARACT_I);
+      drawCharacter(9,12, CHARACT_X);
+      drawCharacter(13,12,CHARACT_E);
+      drawCharacter(17,12,CHARACT_L);
+
   }
 }
 

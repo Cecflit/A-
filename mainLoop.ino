@@ -22,7 +22,7 @@ void loop() {
       drawLogo(game);
       game++;
       playSound(2);
-      if (game > 11)game = 0;
+      if (game > 12)game = 0;
       drawLogo(game);
     }
     wait(6);
@@ -48,6 +48,7 @@ void loop() {
     case 9:  g = new GameUnderAttack; break;
     case 10: g = new GameTetris; break;
     case 11: g = new GameJump; break;
+    case 12: g = new GameFlappyPixel; break;
   }
 
   while (true) {
